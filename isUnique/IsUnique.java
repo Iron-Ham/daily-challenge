@@ -9,6 +9,8 @@ public class IsUnique {
     Otherwise, time complexity is O(n), where n is the size of the input string.
 
     Space Complexity is O(1).
+
+    Solve time: 3 minutes
    */
   public boolean isUnique(String s) {
     //ExASCII = 256. Standard ASCII = 128. UTF-8 = ???
@@ -37,6 +39,8 @@ public class IsUnique {
 
     Space Complexity: O(1), but it uses a smaller amount of space than the
     previous solution.
+
+    Solve time: 10 minutes
    */
   public boolean isUniqueWithoutSet(String s) {
     int check = 0;
@@ -63,6 +67,8 @@ public class IsUnique {
     Space complexity: Arguably, O(1), because the largest the array will ever be
     is the size of the character set. Otherwise, O(n), where n is the size of
     the input string.
+
+    Solve time: 2 minutes.
    */
   public boolean badSolution(String s) {
     if (s.length() > 256) {
@@ -84,6 +90,8 @@ public class IsUnique {
 
     Time complexity: O(n^2)
     Space complexity: O(1)/O(n).
+
+    Solve time: 2 minutes.
    */
   public boolean worseSolution(String s) {
     if (s.length() > 256) {

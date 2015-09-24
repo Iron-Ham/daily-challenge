@@ -3,6 +3,7 @@ public class Answer {
   /*Sorts the two arrays, compares the sorted output.
     Time efficiency: O(nlogn + mlogm) n = length of s1, m = length of s2
     Space efficiency: O(n + m), where n = length of s1, m = length of s2
+    Solve time: 3 minutes.
    */
   public boolean checkPermutation(String s1, String s2) {
     if (s1.length() != s2.length())
@@ -22,6 +23,7 @@ public class Answer {
     second string.
     Time efficiency: O(n + m), where n = length(s1), m = length(s2)
     Space efficiency: O(1)
+    Solve time: 8 minutes.
    */
   public boolean checkPermutationEfficiently(String s1, String s2) {
     if (s1.length() != s2.length())
