@@ -1,5 +1,3 @@
-import com.sun.org.apache.bcel.internal.generic.POP;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -176,6 +174,23 @@ public class Answer {
         if (checkValid(columns, row, col)) {
           columns[row] = col;
           placeQueens(row + 1, columns, results);
+        }
+      }
+    }
+  }
+  public void placeQueensWithDuplicates(int row, Integer[] columns, List<Integer[]> results) {
+    if (row == GRID_SIZE) {
+      results.add(columns.clone());
+      Integer[] reverseSolution = new Integer[GRID_SIZE];
+      for (int i = 0; i < GRID_SIZE; i++) {
+        reverseSolution[i] = columns[columns.length - i - 1];
+      }
+      results.add(reverseSolution);
+    } else {
+      for (int col = 0; col < GRID_SIZE; col++) {
+        if (checkValid(columns, row, col)) {
+          columns[row] = col;
+          placeQueensWithDuplicates(row + 1, columns, results);
         }
       }
     }
