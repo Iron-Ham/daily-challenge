@@ -127,6 +127,20 @@ class GeneticAlgorithm {
         }
     }
 
+    private Double[] probabilityOfMating(Double[] fitnessOfCandidates) {
+        Double[] returnValue = new Double[POPULATION_SIZE];
+        double sum = 0;
+        for (Double d : fitnessOfCandidates) {
+            sum += d;
+        }
+
+        for (int i = 0; i < fitnessOfCandidates.length; i++) {
+            returnValue[i] = fitnessOfCandidates[i] / sum;
+        }
+        return returnValue;
+    }
+
+
    /*Bonus Functions.
     Generates the complete set of valid answers. May be useful for testing.
 
@@ -164,19 +178,6 @@ class GeneticAlgorithm {
     Once we follow this logic, we'll see that it must return an answer, and it's actually pretty
     straightforward to implement.
    */
-
-    private Double[] probabilityOfMating(Double[] fitnessOfCandidates) {
-        Double[] returnValue = new Double[POPULATION_SIZE];
-        double sum = 0;
-        for (Double d : fitnessOfCandidates) {
-            sum += d;
-        }
-
-        for (int i = 0; i < fitnessOfCandidates.length; i++) {
-            returnValue[i] = fitnessOfCandidates[i] / sum;
-        }
-        return returnValue;
-    }
 
     //Does not include mirror image solutions. (i.e., 42061753 is not distinct from 35716024)
     @SuppressWarnings("unused")
