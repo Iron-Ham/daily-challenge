@@ -5,6 +5,7 @@ import java.util.Arrays;
 import static org.junit.Assert.fail;
 public class QueensTests {
 
+    //8 Queens Only
     @Test
     public void testGeneticAlgorithm() {
         Answer myAnswer = new Answer();

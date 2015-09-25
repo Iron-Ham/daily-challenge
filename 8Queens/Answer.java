@@ -3,16 +3,21 @@ import java.util.List;
 import java.util.Random;
 import java.util.Arrays;
 
-/*REQUIRES Java 1.8! I'm using Lambda expressions!
+/*REQUIRES Java 1.8!
   To validate the program, please take a look at the QueensTest.java file.
+
+  Contents:
+  (1) Genetic Algorithm Approach
+  (2) [In-Progress] Simulated Annealing Approach
+  (3) A standard recursive solution to the 8-Queens Problem. Useful for judging the effectiveness of alt. solutions.
  */
-public class Answer {
+class Answer {
 
-  final int GRID_SIZE = 8; //8 Queens, but could similarly be an N-queens prob.
-  final int POPULATION_SIZE = 4;
-  final double MUTATION_RATE = 0.05; //5% mutation rate
+  private final int GRID_SIZE = 8; //8 Queens, but could be an N-queens prob. Fitness function will auto-magically adjust
+  private final int POPULATION_SIZE = 4;
+  private final double MUTATION_RATE = 0.05; //5% mutation rate
 
-  Random rand = new Random();
+  private final Random rand = new Random();
 
   /*Problem 1.
     Genetic Algorithm approach.
@@ -25,7 +30,7 @@ public class Answer {
     }
     while (!Arrays.asList(fitness).contains(1.0)) {
       Double[] matingProbability = probabilityOfMating(fitness);
-      List<Integer[]> newPopulation = new ArrayList<Integer[]>();
+      List<Integer[]> newPopulation = new ArrayList<>();
       while (newPopulation.size() < POPULATION_SIZE) {
         Integer[] parent1 = pickRandomParent(population, matingProbability, null);
         Integer[] parent2 = pickRandomParent(population, matingProbability, parent1);
@@ -50,44 +55,46 @@ public class Answer {
    calculated as (28 - # of collisions) / 28. An array with fitness 1.0 would be a solution, and an
    array with fitness 0.0 has 28 collisions (worst possible outcome).
 
-   Assumption: This is an 8-queens and not an N-Queens problem. The MAXIMUM_COLLISIONS variable
-   would have to change in an N-Queens problem.
-
    Time Complexity: O(1). Since the number of queens is fixed (8), and this is an n^2 algorithm, this algorithm iterates
    a fixed number of times.
    Space complexity: O(1).
   */
-  double assessFitness(Integer[] candidate) {
+  private double assessFitness(Integer[] candidate) {
     int collisions = 0;
-    final int MAXIMUM_COLLISIONS = 28;
+    final int MAXIMUM_COLLISIONS = calculateMaxCollisions();
     for (int i = 0; i < GRID_SIZE - 1; i++) {
       for (int j = i + 1; j < GRID_SIZE; j++) {
-        if ((candidate[i].equals(candidate[j])) || j - i == Math.abs(candidate[i] - candidate[j])) {
+        if ((candidate[i].equals(candidate[j])) || j - i == Math.abs(candidate[i] - candidate[j]))
           collisions++;
-        }
       }
     }
     return (MAXIMUM_COLLISIONS - collisions) / (double) MAXIMUM_COLLISIONS;
   }
 
-  Integer[] crossover(Integer[] candidateOne, Integer[] candidateTwo) {
+  private int calculateMaxCollisions() {
+    int sum = 0;
+    for (int i = GRID_SIZE - 1; i > 0; i--) {
+      sum += i;
+    }
+    return sum;
+  }
+
+  private Integer[] crossover(Integer[] candidateOne, Integer[] candidateTwo) {
     int splitPoint = rand.nextInt(7) + 1; //Splits between 1 and (n - 1), where n = # of queens
     Integer[] returnValue = new Integer[GRID_SIZE];
     for (int i = 0; i < GRID_SIZE; i++) {
-      if (rand.nextDouble() <= MUTATION_RATE) {
+      if (rand.nextDouble() <= MUTATION_RATE)
         returnValue[i] = rand.nextInt(GRID_SIZE);
-      }
-      else if (i < splitPoint) {
+      else if (i < splitPoint)
         returnValue[i] = candidateOne[i];
-      } else {
+      else
         returnValue[i] = candidateTwo[i];
-      }
     }
     return returnValue;
   }
 
-  List<Integer[]> generatePopulation() {
-    List<Integer[]> returnValue = new ArrayList<Integer[]>();
+  private List<Integer[]> generatePopulation() {
+    List<Integer[]> returnValue = new ArrayList<>();
     for (int i = 0; i < POPULATION_SIZE; i++) {
       Integer[] columnSet = new Integer[GRID_SIZE];
       for (int j = 0; j < GRID_SIZE; j++) {
@@ -98,7 +105,7 @@ public class Answer {
     return returnValue;
   }
 
-  Integer[] pickRandomParent(List<Integer[]> candidates, Double[] fitness, Integer[] invalidSet) {
+  private Integer[] pickRandomParent(List<Integer[]> candidates, Double[] fitness, Integer[] invalidSet) {
     while (true) {
       for (int i=0; i < POPULATION_SIZE; i++) {
         Integer[] parent = candidates.get(i);
@@ -111,10 +118,9 @@ public class Answer {
     }
   }
 
-  Double[] probabilityOfMating(Double[] fitnessOfCandidates) {
+  private Double[] probabilityOfMating(Double[] fitnessOfCandidates) {
     Double[] returnValue = new Double[GRID_SIZE];
     double sum = 0;
-
     for (Double d : fitnessOfCandidates) {
       sum += d;
     }
@@ -127,10 +133,6 @@ public class Answer {
 
    /*Bonus Functions.
     Generates the complete set of valid answers. May be useful for testing.
-
-    No idea what the time/space complexity is, because I didn't take the time to calculate its Big
-    O. But I can reason the "branching factor" of this algorithm by explaining how the recursive
-    calls of this algorithm hit the stack.
 
     ways to arrange 8 queens on an 8x8 board =
       ways to arrange 8 queens on an 8x8 board with queen at (7,0)
@@ -156,6 +158,9 @@ public class Answer {
 
           etc...
 
+          If we follow this out, we'll see that the branches decrease pretty quickly. The next iterations for some of
+          these branch as few as 3->1->1->0 or 3->3->1...->1.
+
     If I had to state the general time-space complexity, perhaps O(n * n^b), where n = # of queens
     and b = the average branching factor. The n^b is pretty self explanatory -- that's the measure
     of the recursive call stack. The initial n is the amount of work done in each call.
@@ -164,8 +169,9 @@ public class Answer {
     straightforward to implement.
    */
 
-  List<Integer[]> results = new ArrayList<Integer[]>();
-  //Run to populate results with all valid solutions. Does not include mirror image solutions.
+  final List<Integer[]> results = new ArrayList<>();
+  //Does not include mirror image solutions. (i.e., 42061753 is not distinct from 35716024)
+  @SuppressWarnings("unused")
   public void placeQueens(int row, Integer[] columns, List<Integer[]> results) {
     if (row == GRID_SIZE) {
       results.add(columns.clone());
@@ -195,7 +201,7 @@ public class Answer {
       }
     }
   }
-  boolean checkValid(Integer[] columns, int row1, int column1) {
+  private boolean checkValid(Integer[] columns, int row1, int column1) {
     for (int row2 = 0; row2 < row1; row2++) {
       int column2 = columns[row2];
       if (column1 == column2)
