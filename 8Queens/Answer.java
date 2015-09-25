@@ -1,7 +1,7 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.Arrays;
 
 /*REQUIRES Java 1.8!
   To validate the program, please take a look at the QueensTest.java file.
@@ -11,12 +11,11 @@ import java.util.Arrays;
   (2) [In-Progress] Simulated Annealing Approach
   (3) A standard recursive solution to the 8-Queens Problem. Useful for judging the effectiveness of alt. solutions.
  */
+
 class Answer {
-
-  private final int GRID_SIZE = 8; //8 Queens, but could be an N-queens prob. Fitness function will auto-magically adjust
+  private final int GRID_SIZE = 12; //8 Queens, but could be an N-queens prob. Fitness function will auto-magically adjust
   private final int POPULATION_SIZE = 4;
-  private final double MUTATION_RATE = 0.05; //5% mutation rate
-
+  private final double MUTATION_RATE = 0.05; //1 = 100% mutation rate
   private final Random rand = new Random();
 
   /*Problem 1.
@@ -59,7 +58,7 @@ class Answer {
    a fixed number of times.
    Space complexity: O(1).
   */
-  private double assessFitness(Integer[] candidate) {
+  double assessFitness(Integer[] candidate) {
     int collisions = 0;
     final int MAXIMUM_COLLISIONS = calculateMaxCollisions();
     for (int i = 0; i < GRID_SIZE - 1; i++) {
@@ -169,10 +168,11 @@ class Answer {
     straightforward to implement.
    */
 
+  @SuppressWarnings("unused")
   final List<Integer[]> results = new ArrayList<>();
   //Does not include mirror image solutions. (i.e., 42061753 is not distinct from 35716024)
   @SuppressWarnings("unused")
-  public void placeQueens(int row, Integer[] columns, List<Integer[]> results) {
+  void placeQueens(int row, Integer[] columns, List<Integer[]> results) {
     if (row == GRID_SIZE) {
       results.add(columns.clone());
     } else {
@@ -184,7 +184,8 @@ class Answer {
       }
     }
   }
-  public void placeQueensWithDuplicates(int row, Integer[] columns, List<Integer[]> results) {
+  @SuppressWarnings("unused")
+  void placeQueensWithDuplicates(int row, Integer[] columns, List<Integer[]> results) {
     if (row == GRID_SIZE) {
       results.add(columns.clone());
       Integer[] reverseSolution = new Integer[GRID_SIZE];
