@@ -7,16 +7,13 @@ import java.util.Random;
 
   Contents:
   (1) Genetic Algorithm Approach
-  (2) A standard recursive solution to the 8-Queens Problem. Useful for judging the effectiveness of alt. solutions.
  */
 
 class GeneticAlgorithm {
-    @SuppressWarnings("unused")
-    final List<Integer[]> results = new ArrayList<>();
     private final int GRID_SIZE = 8; //8 Queens but could be an N-queens prob. Fitness function will auto-magically adjust
     private final int POPULATION_SIZE = 6;
     private final double MUTATION_RATE = 0.05; //1.0 = 100% mutation rate
-    private final double CULLING_THRESHOLD = 0.15;
+    private final double CULLING_THRESHOLD = (1 / POPULATION_SIZE) * 0.85;
     private final int MAX_ITERATIONS = -1; //-1 == INFINITE
     private final Random rand = new Random();
 
@@ -42,12 +39,15 @@ class GeneticAlgorithm {
             }
             currentIteration++;
         }
+        Integer[] candidate = population.get(0);
         for (int i = 0; i < fitness.length; i++) {
             if (fitness[i] == 1.0) {
                 return population.get(i);
             }
+            if (assessFitness(candidate) < fitness[i])
+                candidate = population.get(i);
         }
-        return null;
+        return candidate;
     }
 
     private boolean populationContainsSolution(List<Integer[]> population, Double[] fitness) {
