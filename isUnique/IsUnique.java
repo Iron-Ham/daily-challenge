@@ -71,7 +71,7 @@ public class IsUnique {
     Solve time: 2 minutes.
    */
   public boolean badSolution(String s) {
-    if (s.length() > 256) {
+    if (s.length() > 26) {
       return false;
     }
     char[] charArray = s.toCharArray();
