@@ -12,10 +12,12 @@ import java.util.Random;
 class GeneticAlgorithm {
     private final int GRID_SIZE = 8; //8 Queens but could be an N-queens prob. Fitness function will auto-magically adjust
     private final int POPULATION_SIZE = 6;
-    private final double MUTATION_RATE = 0.05; //1.0 = 100% mutation rate
     private final double CULLING_THRESHOLD = (1 / POPULATION_SIZE) * 0.85;
+
     private final int MAX_ITERATIONS = -1; //-1 == INFINITE
+    private final double MUTATION_RATE = 0.05; //1.0 = 100% mutation rate
     private final Random rand = new Random();
+    final int MAX_COLLISIONS = calculateMaxCollisions();
 
     Integer[] geneticAlgorithmSolution() {
         List<Integer[]> population = generatePopulation();
@@ -70,14 +72,13 @@ class GeneticAlgorithm {
     */
     double assessFitness(Integer[] candidate) {
         int collisions = 0;
-        final int MAXIMUM_COLLISIONS = calculateMaxCollisions();
         for (int i = 0; i < GRID_SIZE - 1; i++) {
             for (int j = i + 1; j < GRID_SIZE; j++) {
                 if ((candidate[i].equals(candidate[j])) || j - i == Math.abs(candidate[i] - candidate[j]))
                     collisions++;
             }
         }
-        return (MAXIMUM_COLLISIONS - collisions) / (double) MAXIMUM_COLLISIONS;
+        return (MAX_COLLISIONS - collisions) / (double) MAX_COLLISIONS;
     }
 
     private int calculateMaxCollisions() {
