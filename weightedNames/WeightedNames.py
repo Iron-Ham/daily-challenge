@@ -21,12 +21,12 @@
 #     (string list) ["vi", "abcdefg"]
 
 def answer(names):
-    name_with_values = []
-    for name in names: name_with_values.append(
-        (name, sum([ord(char) - 96 for char in name]))
-    )
-    return [name for (name, cardinal) in sorted(
-        name_with_values,
-        key=lambda element: (element[1], element[0]),
-        reverse=True
-    )]
+  name_with_values = []
+  for name in names: name_with_values.append(
+    (name, sum([ord(char) - 96 for char in name]))
+    )
+  return [name for (name, cardinal) in sorted(
+    name_with_values,
+    key=lambda element: (element[1], element[0]),
+    reverse=True
+  )]
