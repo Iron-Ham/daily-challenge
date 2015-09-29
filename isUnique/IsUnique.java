@@ -44,7 +44,7 @@ public class IsUnique {
    */
   public boolean isUniqueWithoutSet(String s) {
     int check = 0;
-    if (s.length() > 256) {
+    if (s.length() > 26) {
       return false;
     }
     for (int i=0; i < s.length(); i++) {
