@@ -18,16 +18,17 @@ class SimulatedAnnealing {
         while (MAX_ITERATIONS == -1 || iter < MAX_ITERATIONS) {
             temp = scheduleAnnealing(temp);
             double currentStateFitness = calculateStateFitness(currentState);
+            
             if (currentStateFitness == 1.0) return currentState;
+            
             int[] nextState = generateNeighborState(currentState);
             double nextStateFitness = calculateStateFitness(nextState);
             double delta = nextStateFitness - currentStateFitness;
-            if (delta > 0) {
+            if (delta > 0)
                 currentState = nextState;
-            } else if (rand.nextDouble() <= probabilityOfAcceptance(delta, temp)) {
+            else if (rand.nextDouble() <= probabilityOfAcceptance(delta, temp))
                 currentState = nextState;
-            }
-
+                
             iter++;
         }
         return currentState;
