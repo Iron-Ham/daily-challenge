@@ -11,7 +11,7 @@ class SimulatedAnnealing {
     private final Random rand = new Random();
     private final double INITIAL_TEMP = 35;
 
-    int[] simulatedAnnealing() {
+    int[] generateSolution() {
         int[] currentState = generateInitialState();
         int iter = 0;
         double temp = INITIAL_TEMP;
