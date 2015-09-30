@@ -54,7 +54,7 @@ class RecursiveSolution {
             for (int col = 0; col < GRID_SIZE; col++) {
                 if (checkValid(columns, row, col)) {
                     columns[row] = col;
-                    placeQueens(row + 1, columns, results);
+                    placeQueens(row + 1, columns, results, withDuplicates);
                 }
             }
         }

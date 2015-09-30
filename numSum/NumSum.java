@@ -5,13 +5,13 @@ The output must be a single integer digit.
  */
 
 
-public class NumSum {
+import java.util.Scanner;
 
-	private static Scanner stdin;
+public class NumSum {
 
 	public static void main(String[] args) {
 		System.out.println("Enter value");
-		stdin = new Scanner(System.in);
+		Scanner stdin = new Scanner(System.in);
 		System.out.println(answer(stdin.nextLong()));
 	}
 
