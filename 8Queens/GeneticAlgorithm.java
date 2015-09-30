@@ -42,9 +42,8 @@ class GeneticAlgorithm {
         }
         Integer[] candidate = population.get(0);
         for (int i = 0; i < fitness.length; i++) {
-            if (fitness[i] == 1.0) {
+            if (fitness[i] == 1.0)
                 return population.get(i);
-            }
             if (assessFitness(candidate) < fitness[i])
                 candidate = population.get(i);
         }
@@ -53,9 +52,8 @@ class GeneticAlgorithm {
 
     private boolean populationContainsSolution(List<Integer[]> population, Double[] fitness) {
         for (int i = 0; i < population.size(); i++) {
-            if (fitness[i] == 1.0) {
+            if (fitness[i] == 1.0)
                 return true;
-            }
         }
         return false;
     }
@@ -120,9 +118,8 @@ class GeneticAlgorithm {
                 if (candidates.get(i) == invalidSet || fitness[i] < CULLING_THRESHOLD)
                     continue;
                 double val = rand.nextDouble();
-                if (val <= fitness[i]) {
+                if (val <= fitness[i])
                     return candidates.get(i);
-                }
             }
         }
     }
