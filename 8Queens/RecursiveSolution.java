@@ -39,50 +39,51 @@
 import java.util.List;
 
 class RecursiveSolution {
-  private final int GRID_SIZE = 8; //8 Queens but could be an N-queens prob. Fitness function will auto-magically adjust
-   //Does not include mirror image solutions. (i.e., 42061753 is not distinct from 35716024)
-   void placeQueens(int row, Integer[] columns, List<Integer[]> results) {
-       if (row == GRID_SIZE) {
-           results.add(columns.clone());
-       } else {
-           for (int col = 0; col < GRID_SIZE; col++) {
-               if (checkValid(columns, row, col)) {
-                   columns[row] = col;
-                   placeQueens(row + 1, columns, results);
-               }
-           }
-       }
-   }
+    private final int GRID_SIZE = 8; //8 Queens but could be an N-queens prob. Fitness function will auto-magically adjust
 
-   void placeQueensWithDuplicates(int row, Integer[] columns, List<Integer[]> results) {
-       if (row == GRID_SIZE) {
-           results.add(columns.clone());
-           Integer[] reverseSolution = new Integer[GRID_SIZE];
-           for (int i = 0; i < GRID_SIZE; i++) {
-               reverseSolution[i] = columns[columns.length - i - 1];
-           }
-           results.add(reverseSolution);
-       } else {
-           for (int col = 0; col < GRID_SIZE; col++) {
-               if (checkValid(columns, row, col)) {
-                   columns[row] = col;
-                   placeQueensWithDuplicates(row + 1, columns, results);
-               }
-           }
-       }
-   }
+    //Does not include mirror image solutions. (i.e., 42061753 is not distinct from 35716024)
+    void placeQueens(int row, Integer[] columns, List<Integer[]> results) {
+        if (row == GRID_SIZE) {
+            results.add(columns.clone());
+        } else {
+            for (int col = 0; col < GRID_SIZE; col++) {
+                if (checkValid(columns, row, col)) {
+                    columns[row] = col;
+                    placeQueens(row + 1, columns, results);
+                }
+            }
+        }
+    }
 
-   private boolean checkValid(Integer[] columns, int row1, int column1) {
-       for (int row2 = 0; row2 < row1; row2++) {
-           int column2 = columns[row2];
-           if (column1 == column2)
-               return false;
+    void placeQueensWithDuplicates(int row, Integer[] columns, List<Integer[]> results) {
+        if (row == GRID_SIZE) {
+            results.add(columns.clone());
+            Integer[] reverseSolution = new Integer[GRID_SIZE];
+            for (int i = 0; i < GRID_SIZE; i++) {
+                reverseSolution[i] = columns[columns.length - i - 1];
+            }
+            results.add(reverseSolution);
+        } else {
+            for (int col = 0; col < GRID_SIZE; col++) {
+                if (checkValid(columns, row, col)) {
+                    columns[row] = col;
+                    placeQueensWithDuplicates(row + 1, columns, results);
+                }
+            }
+        }
+    }
 
-           int columnDistance = Math.abs(column2 - column1);
-           int rowDistance = row1 - row2;
-           if (columnDistance == rowDistance)
-               return false;
-       }
-       return true;
-   }
+    private boolean checkValid(Integer[] columns, int row1, int column1) {
+        for (int row2 = 0; row2 < row1; row2++) {
+            int column2 = columns[row2];
+            if (column1 == column2)
+                return false;
+
+            int columnDistance = Math.abs(column2 - column1);
+            int rowDistance = row1 - row2;
+            if (columnDistance == rowDistance)
+                return false;
+        }
+        return true;
+    }
 }
