@@ -44,91 +44,88 @@ Output:
 
 public class SearchEngineSnippets {
 
-	///The index and contents of a matched search term
-	public static class KeyWord {
-		int index;
-		String text;
+    public static String answer(String document, String[] searchTerms) {
+        ///Seperate the words based on spaces
+        String[] documentWords = document.split(" ");
+        Path shortestPath = new Path();
+        List<KeyWord> searchHits = new ArrayList<KeyWord>();
+        for (int i = 0; i < documentWords.length; i++) {
+            for (String word : searchTerms) {
+                if (documentWords[i].equals(word)) {
+                    KeyWord currentWord = new KeyWord(i, word);
+                    if (searchHits.isEmpty()) {
+                        searchHits.add(currentWord);
+                    }
+                    ///Clear the current list of hits, and continue from the next node
+                    else if (currentWord.text.equals(searchHits.get(0).text)) {
+                        i = searchHits.get(0).index;
+                        searchHits.clear();
+                    } else {
+                        boolean found = false;
+                        for (KeyWord k : searchHits) {
+                            if (k.text == word) {
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (!found) {
+                            searchHits.add(currentWord);
+                        }
+                    }
+                    break; //We no longer have to continue searching the array of terms
+                }
+            }
+            if (searchHits.size() == searchTerms.length) {
+                ///Determine whether the found path is the shortest encountered path
+                Path currentPath = new Path(searchHits.get(0).index, searchHits.get(searchHits.size() - 1).index);
+                if (currentPath.pathLength < shortestPath.pathLength) {
+                    shortestPath = currentPath;
+                }
+                ///Clear the results to find other paths.
+                i = searchHits.get(0).index;
+                searchHits.clear();
+            }
+        }
+        ///Construct the answer from the shortest path
+        String answer = "";
+        for (int i = shortestPath.startIndex; i <= shortestPath.endIndex; i++) {
+            answer += documentWords[i] + " ";
+        }
+        answer = answer.trim();
+        return answer;
+    }
 
-		public KeyWord(int index, String text) {
-			this.index = index;
-			this.text = text;
-		}
-	}
+    ///The index and contents of a matched search term
+    public static class KeyWord {
+        int index;
+        String text;
 
-	///The range of words that make up a complete set of search terms.
-	public static class Path {
-		int startIndex;
-		int endIndex;
-		int pathLength;
+        public KeyWord(int index, String text) {
+            this.index = index;
+            this.text = text;
+        }
+    }
 
-		public Path() {
-			startIndex = -1;
-			endIndex = -1;
-			pathLength = Integer.MAX_VALUE;
-		}
+    ///The range of words that make up a complete set of search terms.
+    public static class Path {
+        int startIndex;
+        int endIndex;
+        int pathLength;
 
-		public Path(int startIndex, int endIndex) {
-			this.startIndex = startIndex;
-			this.endIndex = endIndex;
-			pathLength = endIndex - startIndex;
-		}
+        public Path() {
+            startIndex = -1;
+            endIndex = -1;
+            pathLength = Integer.MAX_VALUE;
+        }
 
-		public String toString() {
-			return "Start Index: " + startIndex + ", End Index: " + endIndex + ", Path Length: " + pathLength;
-		}
-	}
+        public Path(int startIndex, int endIndex) {
+            this.startIndex = startIndex;
+            this.endIndex = endIndex;
+            pathLength = endIndex - startIndex;
+        }
 
-	public static String answer(String document, String[] searchTerms) {
-		///Seperate the words based on spaces
-		String[] documentWords = document.split(" ");
-		Path shortestPath = new Path();
-		List<KeyWord> searchHits = new ArrayList<KeyWord>();
-		for (int i = 0; i < documentWords.length; i++) {
-			for (String word : searchTerms) {
-				if (documentWords[i].equals(word)) {
-					KeyWord currentWord = new KeyWord(i, word);
-					if (searchHits.isEmpty()) {
-						searchHits.add(currentWord);
-					}
-					///Clear the current list of hits, and continue from the next node
-					else if (currentWord.text.equals(searchHits.get(0).text)) {
-						i = searchHits.get(0).index;
-						searchHits.clear();
-					}
-					else {
-						boolean found = false;
-						for (KeyWord k : searchHits) {
-							if (k.text == word) {
-								found = true;
-								break;
-							}
-						}
-						if (!found) {
-							searchHits.add(currentWord);
-						}
-					}
-					break; //We no longer have to continue searching the array of terms
-				} else {
-					continue; //Keep searching the array of terms
-				}
-			}
-			if (searchHits.size() == searchTerms.length) {
-				///Determine whether the found path is the shortest encountered path
-				Path currentPath = new Path(searchHits.get(0).index, searchHits.get(searchHits.size() - 1).index);
-				if (currentPath.pathLength < shortestPath.pathLength) {
-					shortestPath = currentPath;
-				}
-				///Clear the results to find other paths.
-				i = searchHits.get(0).index;
-				searchHits.clear();
-			}
-		}
-		///Construct the answer from the shortest path
-		String answer = "";
-		for (int i = shortestPath.startIndex; i <= shortestPath.endIndex; i++) {
-			answer += documentWords[i] + " ";
-		}
-		answer = answer.trim();
-		return answer;
-	}
+        public String toString() {
+            return "Start Index: " + startIndex + ", End Index: " + endIndex + ", Path Length: " + pathLength;
+        }
+    }
 }

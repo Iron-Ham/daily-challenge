@@ -8,9 +8,7 @@ public class Answer {
   public boolean checkPermutation(String s1, String s2) {
     if (s1.length() != s2.length())
       return false;
-    if (sort(s1).equals(sort(s2)))
-      return true;
-    return false;
+    return sort(s1).equals(sort(s2));
   }
   private String sort(String s) {
     char[] c = s.toCharArray();

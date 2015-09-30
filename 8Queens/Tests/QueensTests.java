@@ -9,7 +9,6 @@ public class QueensTests {
         GeneticAlgorithm myGeneticAlgorithm = new GeneticAlgorithm();
         Integer[] solution = myGeneticAlgorithm.geneticAlgorithmSolution();
         double fitness = myGeneticAlgorithm.assessFitness(solution);
-
         if (fitness < 1.0) fail();
     }
 
@@ -17,9 +16,7 @@ public class QueensTests {
     public void testSimulatedAnnealing() {
         SimulatedAnnealing mySim = new SimulatedAnnealing();
         int[] solution = mySim.simulatedAnnealing();
-        double fitness = mySim.calculateStateCost(solution);
-        if (fitness < 1.0) {
-            fail();
-        }
+        double fitness = mySim.calculateStateFitness(solution);
+        if (fitness < 1.0) fail();
     }
 }

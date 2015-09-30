@@ -63,9 +63,6 @@ public class WeightedNames {
 					else if (name.charAt(i) < o.name.charAt(i)) {
 						return -1;
 					}
-					else {
-						continue;
-					}
 				}
 			}
 			return 0;

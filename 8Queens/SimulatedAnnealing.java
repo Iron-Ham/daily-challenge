@@ -4,24 +4,23 @@
 
 import java.util.Random;
 
-public class SimulatedAnnealing {
-    final int GRID_SIZE = 8;
-    final int MAX_COLLISIONS = calculateMaxCollisions();
-    final int MAX_ITERATIONS = -1;
-    final Random rand = new Random();
-    final double INITIAL_TEMP = 100;
-    double temp = INITIAL_TEMP;
+class SimulatedAnnealing {
+    private final int GRID_SIZE = 8;
+    private final int MAX_COLLISIONS = calculateMaxCollisions();
+    private final int MAX_ITERATIONS = -1;
+    private final Random rand = new Random();
+    private final double INITIAL_TEMP = 35;
 
     int[] simulatedAnnealing() {
         int[] currentState = generateInitialState();
         int iter = 0;
+        double temp = INITIAL_TEMP;
         while (MAX_ITERATIONS == -1 || iter < MAX_ITERATIONS) {
-            temp = calculateTemp();
-            double currentStateFitness = calculateStateCost(currentState);
+            temp = scheduleAnnealing(temp);
+            double currentStateFitness = calculateStateFitness(currentState);
             if (currentStateFitness == 1.0) return currentState;
             int[] nextState = generateNeighborState(currentState);
-            double nextStateFitness = calculateStateCost(nextState);
-
+            double nextStateFitness = calculateStateFitness(nextState);
             double delta = nextStateFitness - currentStateFitness;
             if (delta > 0) {
                 currentState = nextState;
@@ -35,8 +34,8 @@ public class SimulatedAnnealing {
     }
 
     /* Geometric function. Alt. can be a logarithmic function*/
-    private double calculateTemp() {
-        return temp * 0.97;
+    private double scheduleAnnealing(double currentTemp) {
+        return currentTemp * 0.97;
     }
 
     private int[] generateInitialState() {
@@ -58,7 +57,7 @@ public class SimulatedAnnealing {
         return Math.exp(delta / temperature);
     }
 
-    double calculateStateCost(int[] state) {
+    double calculateStateFitness(int[] state) {
         int collisions = 0;
         for (int i = 0; i < GRID_SIZE - 1; i++) {
             for (int j = i + 1; j < GRID_SIZE; j++) {
