@@ -15,7 +15,7 @@ public class QueensTests {
     @Test
     public void testSimulatedAnnealing() {
         SimulatedAnnealing mySim = new SimulatedAnnealing();
-        int[] solution = mySim.simulatedAnnealing();
+        int[] solution = mySim.generateSolution();
         double fitness = mySim.calculateStateFitness(solution);
         if (fitness < 1.0) fail();
     }
