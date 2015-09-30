@@ -61,9 +61,8 @@ class SimulatedAnnealing {
         int collisions = 0;
         for (int i = 0; i < GRID_SIZE - 1; i++) {
             for (int j = i + 1; j < GRID_SIZE; j++) {
-                if ((state[i] == state[j]) || j - i == Math.abs(state[i] - state[j])) {
+                if ((state[i] == state[j]) || j - i == Math.abs(state[i] - state[j]))
                     collisions++;
-                }
             }
         }
         return (MAX_COLLISIONS - collisions) / (double) MAX_COLLISIONS;
