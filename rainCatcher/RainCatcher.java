@@ -81,26 +81,20 @@ Specifically, suppose there is a line of hutches, stacked to various heights and
  				else if (heights[i] > heights[i+1]) { //First local maximum
  					localMaxima.add(i);
  				}
- 			} else {
- 				//The list of maxima is not empty
- 				if (i == heights.length - 1 && heights[i] > heights[i-1]) {
+ 			} else if (i == heights.length - 1 && heights[i] > heights[i-1]) {
  					//We have found a potential maximum by virtue of being higher than the previous local maximum
  					localMaxima.add(i);
- 				} else {
- 					//Account for the final number being a local maximum
- 					if (heights[i] > heights[i-1] && heights[i] == localMaxima.get(localMaxima.size() - 1)) {
- 						localMaxima.add(i);
- 					}
- 					else if (heights[i] > heights[i-1] && heights[i] > heights[i+1]) {
- 						//Remove previous maxima that were rendered invalid by this one.
- 						for (int j = localMaxima.size() - 1; j > 0; j--) {
- 							if (heights[localMaxima.get(j)] < heights[i] && heights[localMaxima.get(j - 1)] > heights[localMaxima.get(j)]) {
- 								localMaxima.remove(j);
- 							}
- 						}
- 						localMaxima.add(i);
+ 			} else if (heights[i] > heights[i-1] && heights[i] == localMaxima.get(localMaxima.size() - 1)) {
+ 					localMaxima.add(i);
+ 				}
+ 			else if (heights[i] > heights[i-1] && heights[i] > heights[i+1]) {
+ 				//Remove previous maxima that were rendered invalid by this one.
+ 				for (int j = localMaxima.size() - 1; j > 0; j--) {
+ 					if (heights[localMaxima.get(j)] < heights[i] && heights[localMaxima.get(j - 1)] > heights[localMaxima.get(j)]) {
+ 						localMaxima.remove(j);
  					}
  				}
+ 				localMaxima.add(i);
  			}
  		}
  		return localMaxima;
