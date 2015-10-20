@@ -59,7 +59,7 @@ enum Rank {
     QUEEN(12),
     KING(13);
 
-    static int maxRank = 13;
+    static final int maxRank = 13;
 
     private String description;
 
@@ -88,8 +88,6 @@ enum Rank {
             case 13:
                 description = "K";
                 break;
-            default:
-                description = null;
         }
     }
 

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -11,6 +12,10 @@ abstract class Deck {
     @Override
     public String toString() {
         return "Deck of " + cards.size() + " cards";
+    }
+
+    public void shuffle() {
+        Collections.shuffle(cards);
     }
 }
 
