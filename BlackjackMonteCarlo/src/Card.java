@@ -30,7 +30,7 @@ enum Suit {
     DIAMONDS("♦"),
     HEARTS("♥"),
     SPADES("♠"),
-    CLUBS("♠");
+    CLUBS("♣");
 
     private final String text;
 
