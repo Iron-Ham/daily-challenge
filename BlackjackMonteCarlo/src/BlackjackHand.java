@@ -11,6 +11,7 @@ abstract class BlackjackHand {
 
     /**
      * Evaluates the score/value of a given list of cards
+     *
      * @param cards a list of cards to evaluate
      * @return value of given cards
      */
@@ -90,6 +91,7 @@ abstract class BlackjackHand {
 
     /**
      * Add a specified card to the hand
+     *
      * @param card
      */
     public void hit(Card card) {
@@ -109,6 +111,7 @@ class DealerHand extends BlackjackHand {
 
     /**
      * Dealer has one face-down card
+     *
      * @return value of visible cards
      */
     @Override
@@ -120,6 +123,7 @@ class DealerHand extends BlackjackHand {
 
     /**
      * Dealer must stand at 17 or higher
+     *
      * @param card the card to be put into the hand
      */
     @Override
@@ -140,6 +144,7 @@ class PlayerHand extends BlackjackHand {
 
     /**
      * Player must stand at 20 or higher
+     *
      * @param card the card to be put into the hand
      */
     @Override

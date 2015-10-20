@@ -15,7 +15,7 @@ public class PlayBlackjack {
             PlayResult playResult = blackjack.playGame();
             playResults[i] = playResult;
 
-            switch(playResult) {
+            switch (playResult) {
                 case WIN:
                     winCount++;
                     break;
@@ -27,8 +27,8 @@ public class PlayBlackjack {
                     break;
             }
         }
-        System.out.println("Win Rate: " + (double) winCount/playResults.length * 100 + "%");
-        System.out.println("Draw Rate: " + (double) drawCount/playResults.length * 100 + "%");
-        System.out.println("Lose Rate: " + (double) loseCount/playResults.length * 100 + "%");
+        System.out.println("Win Rate: " + (double) winCount / playResults.length * 100 + "%");
+        System.out.println("Draw Rate: " + (double) drawCount / playResults.length * 100 + "%");
+        System.out.println("Lose Rate: " + (double) loseCount / playResults.length * 100 + "%");
     }
 }

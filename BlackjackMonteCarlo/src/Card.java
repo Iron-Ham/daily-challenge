@@ -1,31 +1,3 @@
-/**
- * Created by heshamsalman on 10/20/15.
- */
-
-public class Card {
-
-    private final Rank rank;
-    private final Suit suit;
-
-    Card(Suit suit, Rank rank) {
-        this.rank = rank;
-        this.suit = suit;
-    }
-
-    @Override
-    public String toString() {
-        return rank.toString() + suit.toString();
-    }
-
-    public Rank getRank() {
-        return rank;
-    }
-
-    public Suit getSuit() {
-        return suit;
-    }
-}
-
 enum Suit {
     DIAMONDS("♦"),
     HEARTS("♥"),
@@ -94,5 +66,33 @@ enum Rank {
     @Override
     public String toString() {
         return description;
+    }
+}
+
+/**
+ * Created by heshamsalman on 10/20/15.
+ */
+
+public class Card {
+
+    private final Rank rank;
+    private final Suit suit;
+
+    Card(Suit suit, Rank rank) {
+        this.rank = rank;
+        this.suit = suit;
+    }
+
+    @Override
+    public String toString() {
+        return rank.toString() + suit.toString();
+    }
+
+    public Rank getRank() {
+        return rank;
+    }
+
+    public Suit getSuit() {
+        return suit;
     }
 }

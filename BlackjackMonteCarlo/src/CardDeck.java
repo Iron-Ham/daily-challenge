@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Created by heshamsalman on 10/20/15.
@@ -27,7 +26,7 @@ abstract class Deck {
     }
 }
 
-class CardDeck extends  Deck {
+class CardDeck extends Deck {
     CardDeck() {
         cards = new ArrayList<>();
 
