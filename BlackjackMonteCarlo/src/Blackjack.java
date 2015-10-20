@@ -2,21 +2,88 @@
  * Created by heshamsalman on 10/20/15.
  */
 public class Blackjack {
-    Deck cards;
+    private Deck cards;
+    private BlackjackHand player;
+    private BlackjackHand dealer;
 
     Blackjack() {
         cards = new CardDeck();
+        player = new PlayerHand();
+        dealer = new DealerHand();
     }
 
     PlayResult playGame() {
         PlayResult result = PlayResult.NONE;
+        //Deal initial cards
+        dealStartingHands(dealer, player);
 
-        // Game loop
-        while (result == PlayResult.NONE) {
-            //TODO: Game Logic
+        // Game loops
+        while (dealer.isPlaying && player.isPlaying) {
+            playRound(dealer, player);
+        }
+        while (dealer.isPlaying) {
+            Card c = cards.drawCard();
+            dealer.hit(c);
+        }
+        while (player.isPlaying) {
+            Card c = cards.drawCard();
+            player.hit(c);
         }
 
+        // Calculate game result
+        int dealerScore = dealer.stand();
+        int playerScore = player.stand();
+        result = calculateResult(dealerScore, playerScore);
+
+        // Clean up
+        dealer.cards.clear();
+        player.cards.clear();
+        dealer.isPlaying = true;
+        player.isPlaying = true;
+        cards = new CardDeck();
+
         return result;
+    }
+
+    private PlayResult calculateResult(int dealerScore, int playerScore) {
+        if (playerScore <= 21 && dealerScore <= 21) {
+            if (playerScore > dealerScore) {
+                return PlayResult.WIN;
+            }
+            else if (dealerScore == playerScore) {
+                return PlayResult.DRAW;
+            } else {
+                return PlayResult.LOSE;
+            }
+        } else if (playerScore > 21 && dealerScore > 21) {
+            return PlayResult.DRAW;
+        } else {
+            if (playerScore > 21) {
+                return PlayResult.LOSE;
+            }
+            return PlayResult.WIN;
+        }
+    }
+
+    private void playRound(BlackjackHand dealerHand, BlackjackHand playerHand) {
+        if (dealerHand.isPlaying) {
+            Card c = cards.drawCard();
+            dealerHand.hit(c);
+        }
+        if (playerHand.isPlaying) {
+            Card c = cards.drawCard();
+            playerHand.hit(c);
+        }
+    }
+
+    private void dealStartingHands(BlackjackHand dealerHand, BlackjackHand playerHand) {
+        for (int i = 0; i < 2; i++) {
+            Card c1 = cards.drawCard();
+            Card c2 = cards.drawCard();
+
+            dealerHand.hit(c1);
+            playerHand.hit(c2);
+        }
     }
 }
 

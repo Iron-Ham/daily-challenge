@@ -84,9 +84,13 @@ abstract class BlackjackHand {
     }
 
     public void hit(Card card) {
-        cards.add(card);
-        this.value = evaluateHandValue(cards);
+        if (isPlaying) {
+            cards.add(card);
+            this.value = evaluateHandValue(cards);
+        }
     }
+
+
 }
 
 
