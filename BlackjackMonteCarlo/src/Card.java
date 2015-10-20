@@ -40,17 +40,6 @@ enum Rank {
             case 1:
                 description = "A";
                 break;
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-            case 6:
-            case 7:
-            case 8:
-            case 9:
-            case 10:
-                description = Integer.toString(value);
-                break;
             case 11:
                 description = "J";
                 break;
@@ -59,6 +48,9 @@ enum Rank {
                 break;
             case 13:
                 description = "K";
+                break;
+            default:
+                description = Integer.toString(value);
                 break;
         }
     }
