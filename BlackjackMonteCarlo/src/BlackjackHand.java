@@ -5,11 +5,16 @@ import java.util.List;
  * Created by heshamsalman on 10/20/15.
  */
 abstract class BlackjackHand {
-    protected List<Card> cards;
-    protected int value;
+    List<Card> cards;
+    int value;
     boolean isPlaying;
 
-    protected int evaluateHandValue(List<Card> cards) {
+    /**
+     * Evaluates the score/value of a given list of cards
+     * @param cards a list of cards to evaluate
+     * @return value of given cards
+     */
+    int evaluateHandValue(List<Card> cards) {
         int value = 0;
         int aceCount = 0;
 
@@ -83,16 +88,17 @@ abstract class BlackjackHand {
         return value;
     }
 
+    /**
+     * Add a specified card to the hand
+     * @param card
+     */
     public void hit(Card card) {
         if (isPlaying) {
             cards.add(card);
             this.value = evaluateHandValue(cards);
         }
     }
-
-
 }
-
 
 class DealerHand extends BlackjackHand {
     DealerHand() {
@@ -109,8 +115,7 @@ class DealerHand extends BlackjackHand {
     public int getValue() {
         List<Card> visibleCards = cards;
         visibleCards.remove(0);
-        int value = evaluateHandValue(visibleCards);
-        return value;
+        return evaluateHandValue(visibleCards);
     }
 
     /**

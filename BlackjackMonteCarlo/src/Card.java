@@ -4,8 +4,8 @@
 
 public class Card {
 
-    private Rank rank;
-    private Suit suit;
+    private final Rank rank;
+    private final Suit suit;
 
     Card(Suit suit, Rank rank) {
         this.rank = rank;
@@ -34,7 +34,7 @@ enum Suit {
 
     private final String text;
 
-    private Suit(final String text) {
+    Suit(final String text) {
         this.text = text;
     }
 
@@ -63,7 +63,7 @@ enum Rank {
 
     private String description;
 
-    private Rank(int value) {
+    Rank(int value) {
         switch (value) {
             case 1:
                 description = "A";

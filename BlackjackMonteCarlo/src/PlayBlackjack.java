@@ -25,9 +25,6 @@ public class PlayBlackjack {
                 case DRAW:
                     drawCount++;
                     break;
-                case NONE:
-                    System.out.println("Something's wrong!");
-                    break;
             }
         }
         System.out.println("Win Rate: " + (double) winCount/playResults.length * 100 + "%");

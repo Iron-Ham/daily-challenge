@@ -9,35 +9,34 @@ import java.util.Random;
 
 abstract class Deck {
     List<Card> cards;
-    Random r;
 
     @Override
     public String toString() {
         return "Deck of " + cards.size() + " cards";
     }
 
-    public void shuffle() {
+    void shuffle() {
         Collections.shuffle(cards);
     }
 
     public Card drawCard() {
-        int randIndex = r.nextInt(cards.size());
-        Card c = cards.remove(randIndex);
-
-        return c;
+        if (cards.size() > 0) {
+            return cards.remove(0);
+        }
+        return null;
     }
 }
 
-public class CardDeck extends  Deck {
+class CardDeck extends  Deck {
     CardDeck() {
         cards = new ArrayList<>();
-        r = new Random();
 
         for (Suit s : Suit.values()) {
             for (Rank r : Rank.values()) {
                 cards.add(new Card(s, r));
             }
         }
+        shuffle();
     }
 }
 

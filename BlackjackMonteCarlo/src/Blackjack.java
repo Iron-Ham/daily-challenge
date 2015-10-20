@@ -1,10 +1,10 @@
 /**
  * Created by heshamsalman on 10/20/15.
  */
-public class Blackjack {
+class Blackjack {
     private Deck cards;
-    private BlackjackHand player;
-    private BlackjackHand dealer;
+    private final BlackjackHand player;
+    private final BlackjackHand dealer;
 
     Blackjack() {
         cards = new CardDeck();
@@ -12,8 +12,12 @@ public class Blackjack {
         dealer = new DealerHand();
     }
 
+    /**
+     * Plays one round of blackjack. Cleans up after self.
+     * @return
+     */
     PlayResult playGame() {
-        PlayResult result = PlayResult.NONE;
+        PlayResult result;
         //Deal initial cards
         dealStartingHands(dealer, player);
 
@@ -88,18 +92,14 @@ public class Blackjack {
 }
 
 enum PlayResult {
-    NONE(0),
     WIN(1),
     DRAW(2),
     LOSE(3);
 
     private String description;
 
-    private PlayResult(int value) {
+    PlayResult(int value) {
         switch (value) {
-            case 0:
-                description = "Error -- No Result Recorded!";
-                break;
             case 1:
                 description = "Player wins";
                 break;
