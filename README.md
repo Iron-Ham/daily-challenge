@@ -2,6 +2,7 @@
 https://www.youtube.com/watch?v=9RzWRPgc54Q 
 
 ## Recently Completed
+- Monte Carlo Blackjack
 - 8 Queens (Simulated Annealing)
 - 8 Queens (Genetic Algorithm)
 
