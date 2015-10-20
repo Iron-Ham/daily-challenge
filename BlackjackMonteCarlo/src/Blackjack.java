@@ -67,10 +67,8 @@ class Blackjack {
         result = calculateResult(dealerScore, playerScore);
 
         // Clean up
-        dealer.cards.clear();
-        player.cards.clear();
-        dealer.isPlaying = true;
-        player.isPlaying = true;
+        dealer.clearContents();
+        player.clearContents();
         cards = new CardDeck();
 
         return result;
