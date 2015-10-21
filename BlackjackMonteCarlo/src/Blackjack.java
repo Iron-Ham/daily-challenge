@@ -1,40 +1,24 @@
-enum PlayResult {
-    WIN(1),
-    DRAW(2),
-    LOSE(3);
-
-    private String description;
-
-    PlayResult(int value) {
-        switch (value) {
-            case 1:
-                description = "Player wins";
-                break;
-            case 2:
-                description = "Draw";
-                break;
-            case 3:
-                description = "House wins";
-                break;
-        }
-    }
-
-    public String toString() {
-        return description;
-    }
-}
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by heshamsalman on 10/20/15.
  */
+
 class Blackjack {
-    private final BlackjackHand player;
+    private final List<BlackjackHand> players;
     private final BlackjackHand dealer;
     private Deck cards;
 
-    Blackjack() {
+    private HandState[] results;
+
+    Blackjack(int playerCount) {
+        results = new HandState[playerCount];
         cards = new CardDeck();
-        player = new PlayerHand();
+        players = new ArrayList<>();
+        for (int i = 0; i < playerCount; i++) {
+            players.add(new PlayerHand());
+        }
         dealer = new DealerHand();
     }
 
@@ -43,90 +27,47 @@ class Blackjack {
      *
      * @return
      */
-    PlayResult playGame() {
-        roundCount++;
-        PlayResult result = null;
+    HandState[] playGame() {
+        results = new HandState[players.size()];
         //Deal initial cards
-        dealStartingHands(dealer, player);
+        dealStartingHand(dealer);
 
-        //If the player gets an instant-blackjack, the player wins irrespective of the dealer's hand.
-        if (!player.isPlaying) {
-            result = PlayResult.WIN;
-            printHand(result);
-            prepareForNextGame();
-            return result;
-        }
+        players.forEach(this::dealStartingHand);
 
         //In casinos, the game is played such that all players must stand or bust before the dealer plays his turn.
-        while (player.isPlaying) {
-            playRound(player);
-        }
-
-        while (dealer.isPlaying && player.stand() <= 21) {
-            playRound(dealer);
-        }
-        
-        result = evaluateHands(dealer, player);
-        printHand(result);
+        playersRound();
+        dealersRound();
+        evaluatePlayers();
         prepareForNextGame();
-        return result;
 
+        return results;
     }
 
-    private PlayResult evaluateHands(BlackjackHand dealer, BlackjackHand player) {
-        //Dealer has stood or busted. This condition must be checked before the reverse of it because of the showdown rule.
-        if (!dealer.isPlaying && player.isPlaying) {
-            //If dealer has busted
-            if (dealer.stand() > 21) {
-                //The player would not be playing if his value is over 21. Thus, we can safely return a win.
-                return PlayResult.WIN;
-            }
-            //We cannot evaluate the game if the dealer is standing and the player is still playing.
-            return null;
-        }
-        //Immature evaluation of the game.
-        else if (dealer.isPlaying && player.isPlaying) {
-            return null;
-        }
-        //The player has stood or busted
-        else if (!player.isPlaying && dealer.isPlaying) {
-            if (player.stand() > 21) {
-                return PlayResult.LOSE;
-            }
-            //We cannot evaluate the game if the dealer is still playing and the player has stood.
-            return null;
-        }
-        //The player and the dealer are both not playing
-        else {
-            int dealerScore = dealer.stand();
-            int playerScore = player.stand();
-
-            if (playerScore <= 21 && dealerScore <= 21) {
-                if (playerScore == dealerScore) return PlayResult.DRAW;
-                else return playerScore > dealerScore? PlayResult.WIN : PlayResult.LOSE;
-            } else if (playerScore > 21 && dealerScore > 21) {
-                return PlayResult.DRAW;
-            } else if (playerScore <= 21) {
-                return PlayResult.WIN;
-            } else {
-                return PlayResult.LOSE;
-            }
+    private void evaluatePlayers() {
+        for (int i = 0; i < players.size(); i ++) {
+            BlackjackHand player = players.get(i);
+            HandState result = player.evaluateHandAgainstDealer(dealer);
+            results[i] = result;
         }
     }
 
-    private int roundCount = 0;
-    private void printHand(PlayResult result) {
-        System.out.println("ROUND: " + roundCount);
-        System.out.println("Dealer:");
-        dealer.cards.forEach(System.out::println);
-        System.out.println("Player:");
-        player.cards.forEach(System.out::println);
-        System.out.println(result + "\n");
+    private void dealersRound() {
+        while (dealer.isPlaying) {
+            Card c = cards.drawCard();
+            dealer.hit(c);
+        }
+    }
+
+    private void playersRound() {
+        players.stream().filter(p -> p.isPlaying).forEach(p -> {
+            Card c = cards.drawCard();
+            p.hit(c);
+        });
     }
 
     private void prepareForNextGame() {
-        dealer.clearContents();
-        player.clearContents();
+        dealer.clear();
+        players.forEach(BlackjackHand::clear);
         cards = new CardDeck();
     }
 
@@ -137,13 +78,10 @@ class Blackjack {
         }
     }
 
-    private void dealStartingHands(BlackjackHand dealerHand, BlackjackHand playerHand) {
+    private void dealStartingHand(BlackjackHand hand) {
         for (int i = 0; i < 2; i++) {
             Card c1 = cards.drawCard();
-            Card c2 = cards.drawCard();
-
-            dealerHand.hit(c1);
-            playerHand.hit(c2);
+            hand.hit(c1);
         }
     }
 }

@@ -4,10 +4,54 @@ import java.util.List;
 /**
  * Created by heshamsalman on 10/20/15.
  */
+enum HandState {
+    NONE(0),
+    WIN(1),
+    DRAW(2),
+    LOSE(3);
+
+    private String description;
+
+    HandState(int value) {
+        switch (value) {
+            case 0:
+                description = "NO GAME STATE DETECTED";
+                break;
+            case 1:
+                description = "Player wins";
+                break;
+            case 2:
+                description = "Draw";
+                break;
+            case 3:
+                description = "House wins";
+                break;
+        }
+    }
+
+    public String toString() {
+        return description;
+    }
+}
+
 abstract class BlackjackHand {
     List<Card> cards;
     int value;
     boolean isPlaying;
+    private HandState state;
+
+    HandState getState() {
+        return this.state;
+    }
+
+    @Override
+    public String toString() {
+        String description = "";
+        for (Card c : cards) {
+            description += c.toString() + "\n";
+        }
+        return description;
+    }
 
     /**
      * Evaluates the score/value of a given list of cards
@@ -15,52 +59,24 @@ abstract class BlackjackHand {
      * @param cards a list of cards to evaluate
      * @return value of given cards
      */
-    int evaluateHandValue(List<Card> cards) {
+    private int evaluateHandValue(List<Card> cards) {
         int value = 0;
         int aceCount = 0;
 
         for (Card card : cards) {
-            switch (card.getRank()) {
+            Rank r = card.getRank();
+            switch (r) {
                 case ACE:
                     // Deal with aces after the value for remaining cards has been determined.
                     aceCount++;
                     break;
-                case TWO:
-                    value += 2;
-                    break;
-                case THREE:
-                    value += 3;
-                    break;
-                case FOUR:
-                    value += 4;
-                    break;
-                case FIVE:
-                    value += 5;
-                    break;
-                case SIX:
-                    value += 6;
-                    break;
-                case SEVEN:
-                    value += 7;
-                    break;
-                case EIGHT:
-                    value += 8;
-                    break;
-                case NINE:
-                    value += 9;
-                    break;
-                case TEN:
-                    value += 10;
-                    break;
                 case JACK:
-                    value += 10;
-                    break;
                 case QUEEN:
-                    value += 10;
-                    break;
                 case KING:
                     value += 10;
                     break;
+                default:
+                    value += Integer.parseInt(r.toString());
             }
         }
 
@@ -74,15 +90,44 @@ abstract class BlackjackHand {
                 value += 1;
             }
         }
+
+        if (value == 21 && cards.size() == 2) {
+            this.isPlaying = false;
+        }
+
         if (value > 21) {
             this.isPlaying = false;
         }
         return value;
     }
 
-    public int stand() {
+    public HandState evaluateHandAgainstDealer(BlackjackHand dealer) {
+        // Check for blackjack
+        if (this.value == 21 && cards.size() == 2) {
+            this.state = HandState.WIN;
+        }
+        // Check for bust
+        else if (this.value > 21) {
+            this.state = HandState.LOSE;
+        }
+        // Check for dealer bust
+        else if (dealer.value > 21) {
+            this.state = HandState.WIN;
+        }
+        else if (this.value == dealer.value) {
+            this.state = HandState.DRAW;
+        }
+        else if (this.value > dealer.value) {
+            this.state = HandState.WIN;
+        } else {
+            this.state = HandState.LOSE;
+        }
+
+        return this.state;
+    }
+
+    void stand() {
         this.isPlaying = false;
-        return value;
     }
 
     public int getValue() {
@@ -104,7 +149,7 @@ abstract class BlackjackHand {
     /**
      * Used to re-initialize self for a new game.
      */
-    public void clearContents() {
+    public void clear() {
         cards.clear();
         isPlaying = true;
     }
@@ -115,18 +160,6 @@ class DealerHand extends BlackjackHand {
         cards = new ArrayList<>();
         value = 0;
         isPlaying = true;
-    }
-
-    /**
-     * Dealer has one face-down card
-     *
-     * @return value of visible cards
-     */
-    @Override
-    public int getValue() {
-        List<Card> visibleCards = cards;
-        visibleCards.remove(0);
-        return evaluateHandValue(visibleCards);
     }
 
     /**

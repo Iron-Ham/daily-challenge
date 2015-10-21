@@ -69,10 +69,20 @@ public class Card {
 
     private final Rank rank;
     private final Suit suit;
+    private boolean flipped;
 
     Card(Suit suit, Rank rank) {
         this.rank = rank;
         this.suit = suit;
+        flipped = true;
+    }
+
+    public void flip() {
+        flipped = !flipped;
+    }
+
+    public boolean isFaceUp() {
+        return !flipped;
     }
 
     @Override
