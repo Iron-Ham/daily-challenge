@@ -3,9 +3,17 @@ import java.util.List;
 
 /**
  * Created by heshamsalman on 10/20/15.
+ *
+ * A BlackjackHand is a hand of cards. It is also a representation of a player or dealer. The hand can be active
+ * (isPlaying) or inactive (!isPlaying). By default, a BlackjackHand will hold at 17.
+ *
+ * DealerHand is an implementation of BlackjackHand. It has no custom parameters or changes.
+ *
+ * PlayerHand is an implementation of BlackjackHand which sets a custom hold-value parameter.
+ *
+ * HandState is an enumerable that defines whether a particular hand has won, drawn, or lost.
  */
 enum HandState {
-    NONE(0),
     WIN(1),
     DRAW(2),
     LOSE(3);
@@ -14,9 +22,6 @@ enum HandState {
 
     HandState(int value) {
         switch (value) {
-            case 0:
-                description = "NO GAME STATE DETECTED";
-                break;
             case 1:
                 description = "Player wins";
                 break;
@@ -102,6 +107,11 @@ abstract class BlackjackHand {
         return value;
     }
 
+    /**
+     * Sets the hand-state by comparing the current hand to the dealer's.
+     * @param dealer
+     * @return
+     */
     public HandState evaluateHandAgainstDealer(BlackjackHand dealer) {
         // Check for blackjack
         if (this.value == 21 && cards.size() == 2) {
@@ -115,6 +125,7 @@ abstract class BlackjackHand {
         else if (dealer.value > 21) {
             this.state = HandState.WIN;
         }
+        // Check for draw
         else if (this.value == dealer.value) {
             this.state = HandState.DRAW;
         }
@@ -127,7 +138,7 @@ abstract class BlackjackHand {
         return this.state;
     }
 
-    void stand() {
+    private void stand() {
         this.isPlaying = false;
     }
 

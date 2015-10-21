@@ -1,3 +1,10 @@
+/**
+ * Created by heshamsalman on 10/20/15.
+ *
+ * A Card is an object with a rank and suit. A card can be face-up or face-down. Suit and Rank are defined as enumerable
+ * values.
+ */
+
 enum Suit {
     DIAMONDS("♦"),
     HEARTS("♥"),
@@ -60,10 +67,6 @@ enum Rank {
         return description;
     }
 }
-
-/**
- * Created by heshamsalman on 10/20/15.
- */
 
 public class Card {
 

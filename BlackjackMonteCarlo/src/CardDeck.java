@@ -4,6 +4,9 @@ import java.util.List;
 
 /**
  * Created by heshamsalman on 10/20/15.
+ *
+ * A Deck is a collection of cards. A CardDeck is an implementation of Card, wherein one card of each rank and suit
+ * is present.
  */
 
 abstract class Deck {

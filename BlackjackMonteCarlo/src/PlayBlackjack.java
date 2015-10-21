@@ -3,6 +3,13 @@ import java.util.List;
 
 /**
  * Created by heshamsalman on 10/20/15.
+ * REQUIRES Java 1.8
+ * (I'm using the new stream APIs & lambdas)
+ *
+ * Make sure to set the HOLD_VALUES parameter to the values that the AI player should hold at. It can take as many
+ * arguments as you'd like to give it, but be aware that the game is played with ONLY ONE DECK. If the number of
+ * parameters is too high, the deck will draw-out and the program will crash. A responsible maximum number of parameters
+ * is 6 or 7.
  */
 public class PlayBlackjack {
     private static final int MAX_ITERATIONS = 1000;
@@ -20,6 +27,10 @@ public class PlayBlackjack {
         printPlayerRatings(simulationResults);
     }
 
+    /**
+     * Prints the results of the simulation for each player
+     * @param simulationResults
+     */
     private static void printPlayerRatings(List<HandState[]> simulationResults) {
         //Evaluate Each Player's Wins, Losses, and Ties
         for (int player = 0; player < NUMBER_OF_PLAYERS; player++) {
@@ -41,9 +52,6 @@ public class PlayBlackjack {
                     case DRAW:
                         drawCount++;
                         break;
-                    case NONE:
-                        System.out.println("Fatal Error 1: No game state detected");
-                        System.exit(1);
                 }
             }
 

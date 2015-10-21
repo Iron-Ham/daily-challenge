@@ -3,6 +3,8 @@ import java.util.List;
 
 /**
  * Created by heshamsalman on 10/20/15.
+ *
+ * Plays a game of blackjack. Cleans up after self.
  */
 
 class Blackjack {
@@ -17,8 +19,8 @@ class Blackjack {
         results = new HandState[playerCount];
         cards = new CardDeck();
         players = new ArrayList<>();
-        for (int i = 0; i < playerCount; i++) {
-            players.add(new PlayerHand(holdValues[i]));
+        for (int holdValue : holdValues) {
+            players.add(new PlayerHand(holdValue));
         }
         dealer = new DealerHand();
     }
@@ -70,13 +72,6 @@ class Blackjack {
         dealer.clear();
         players.forEach(BlackjackHand::clear);
         cards = new CardDeck();
-    }
-
-    private void playRound(BlackjackHand hand) {
-        if (hand.isPlaying) {
-            Card c = cards.drawCard();
-            hand.hit(c);
-        }
     }
 
     private void dealStartingHand(BlackjackHand hand) {
