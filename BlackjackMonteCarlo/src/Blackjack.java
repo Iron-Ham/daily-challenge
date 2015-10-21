@@ -59,7 +59,7 @@ class Blackjack {
         }
 
         //If we're making the assumption that the game is played at the same time (1v1 home-blackjack), uncomment the
-        //following function and comment out the line `result = evaluateHands(dealer, player);`
+        //following function and comment out the previous two while loops
 //        while (result == null) {
 //            playRound(dealer);
 //            playRound(player);
