@@ -1,7 +1,7 @@
 # Monte Carlo Simulation of Blackjack
 
 ## Running
-Compile all java files, and execute the PlayBlackjack class.
+**Requires Java 1.8 Compiler**. Compile all java files, and execute the PlayBlackjack class.
 
 `cd /path/to/src/`
 
