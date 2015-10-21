@@ -9,7 +9,7 @@
 
 ## Assumptions
 1. Dealer does not hit on a soft-17 (17 with an ace counting as an 11).
-2. If the player gets a blackjack (21 on first two cards), the player immediately wins. 
+2. If the player gets a blackjack (21 on first two cards), the player immediately wins, *even if the dealer has 21*. 
 
 ## Output
 Program outputs the rates of each player of the game.
