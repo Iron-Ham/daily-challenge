@@ -5,7 +5,7 @@ import java.util.List;
  * Created by heshamsalman on 10/20/15.
  */
 abstract class BlackjackHand {
-    protected List<Card> cards;
+    List<Card> cards;
     int value;
     boolean isPlaying;
 
@@ -75,13 +75,13 @@ abstract class BlackjackHand {
             }
         }
         if (value > 21) {
-            isPlaying = false;
+            this.isPlaying = false;
         }
         return value;
     }
 
     public int stand() {
-        isPlaying = false;
+        this.isPlaying = false;
         return value;
     }
 

@@ -33,7 +33,7 @@ enum Rank {
 
     static final int maxRank = 13;
 
-    private String description;
+    private final String description;
 
     Rank(int value) {
         switch (value) {

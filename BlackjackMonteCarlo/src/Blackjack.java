@@ -44,6 +44,7 @@ class Blackjack {
      * @return
      */
     PlayResult playGame() {
+        roundCount++;
         PlayResult result;
         //Deal initial cards
         dealStartingHands(dealer, player);
@@ -56,22 +57,38 @@ class Blackjack {
             Card c = cards.drawCard();
             dealer.hit(c);
         }
-        while (player.isPlaying) {
-            Card c = cards.drawCard();
-            player.hit(c);
+
+        if (player.isPlaying && dealer.stand() > 21) {
+            //Player wins due to showdown rule.
+            result = PlayResult.WIN;
+            printHand(result);
+            prepareForNextGame();
+            return result;
+        } else {
+            // Calculate game result
+            int dealerScore = dealer.stand();
+            int playerScore = player.stand();
+            result = calculateResult(dealerScore, playerScore);
+            printHand(result);
+            prepareForNextGame();
+            return result;
         }
+    }
 
-        // Calculate game result
-        int dealerScore = dealer.stand();
-        int playerScore = player.stand();
-        result = calculateResult(dealerScore, playerScore);
+    private int roundCount = 0;
+    private void printHand(PlayResult result) {
+        System.out.println("ROUND: " + roundCount);
+        System.out.println("Dealer:");
+        dealer.cards.forEach(System.out::println);
+        System.out.println("Player:");
+        player.cards.forEach(System.out::println);
+        System.out.println(result + "\n");
+    }
 
-        // Clean up
+    private void prepareForNextGame() {
         dealer.clearContents();
         player.clearContents();
         cards = new CardDeck();
-
-        return result;
     }
 
     private PlayResult calculateResult(int dealerScore, int playerScore) {
