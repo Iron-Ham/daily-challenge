@@ -45,47 +45,61 @@ class Blackjack {
      */
     PlayResult playGame() {
         roundCount++;
-        PlayResult result;
+        PlayResult result = null;
         //Deal initial cards
         dealStartingHands(dealer, player);
 
         // Game loops
-        while (dealer.isPlaying && player.isPlaying) {
+        while (result == null) {
             playRound(dealer, player);
+            result = evaluateHands(dealer, player);
         }
-        // The player has stood but not busted.
-        while (dealer.isPlaying && player.stand() <= 21) {
-            Card c = cards.drawCard();
-            dealer.hit(c);
-        }
-        //If the player has busted
-        if (dealer.isPlaying) {
-            result = PlayResult.LOSE;
-            printHand(result);
-            prepareForNextGame();
-            return result;
-        }
-        //If the dealer has busted
-        if (player.isPlaying && dealer.stand() > 21) {
-            result = PlayResult.WIN;
-            printHand(result);
-            prepareForNextGame();
-            return result;
-        }
-
-        //The dealer has stood, the player has not busted
-        while (player.isPlaying) {
-            Card c = cards.drawCard();
-            player.hit(c);
-        }
-
-        int dealerScore = dealer.stand();
-        int playerScore = player.stand();
-        result = calculateResult(dealerScore, playerScore);
         printHand(result);
         prepareForNextGame();
         return result;
 
+    }
+
+    private PlayResult evaluateHands(BlackjackHand dealer, BlackjackHand player) {
+        //Dealer has stood or busted. This condition must be checked before the reverse of it because of the showdown rule.
+        if (!dealer.isPlaying && player.isPlaying) {
+            //If dealer has busted
+            if (dealer.stand() > 21) {
+                if (player.getValue() <= 21) {
+                    return PlayResult.WIN;
+                }
+            }
+            //We cannot evaluate the game if the dealer is standing and the player is still playing.
+            return null;
+        }
+        //Immature evaluation of the game.
+        else if (dealer.isPlaying && player.isPlaying) {
+            return null;
+        }
+        //The player has stood or busted
+        else if (!player.isPlaying && dealer.isPlaying) {
+            if (player.stand() > 21) {
+                return PlayResult.LOSE;
+            }
+            //We cannot evaluate the game if the dealer is still playing and the player has stood.
+            return null;
+        }
+        //The player and the dealer are both not playing
+        else {
+            int dealerScore = dealer.stand();
+            int playerScore = player.stand();
+
+            if (playerScore <= 21 && dealerScore <= 21) {
+                if (playerScore == dealerScore) return PlayResult.DRAW;
+                else return playerScore > dealerScore? PlayResult.WIN : PlayResult.LOSE;
+            } else if (playerScore > 21 && dealerScore > 21) {
+                return PlayResult.DRAW;
+            } else if (playerScore <= 21) {
+                return PlayResult.WIN;
+            } else {
+                return PlayResult.LOSE;
+            }
+        }
     }
 
     private int roundCount = 0;
@@ -102,25 +116,6 @@ class Blackjack {
         dealer.clearContents();
         player.clearContents();
         cards = new CardDeck();
-    }
-
-    private PlayResult calculateResult(int dealerScore, int playerScore) {
-        if (playerScore <= 21 && dealerScore <= 21) {
-            if (playerScore > dealerScore) {
-                return PlayResult.WIN;
-            } else if (dealerScore == playerScore) {
-                return PlayResult.DRAW;
-            } else {
-                return PlayResult.LOSE;
-            }
-        } else if (playerScore > 21 && dealerScore > 21) {
-            return PlayResult.DRAW;
-        } else {
-            if (playerScore > 21) {
-                return PlayResult.LOSE;
-            }
-            return PlayResult.WIN;
-        }
     }
 
     private void playRound(BlackjackHand dealerHand, BlackjackHand playerHand) {
