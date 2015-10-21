@@ -39,6 +39,7 @@ abstract class BlackjackHand {
     int value;
     boolean isPlaying;
     private HandState state;
+    int holdValue = 17;
 
     HandState getState() {
         return this.state;
@@ -143,6 +144,9 @@ abstract class BlackjackHand {
         if (isPlaying) {
             cards.add(card);
             this.value = evaluateHandValue(cards);
+            if (this.value >= holdValue) {
+                stand();
+            }
         }
     }
 
@@ -161,38 +165,13 @@ class DealerHand extends BlackjackHand {
         value = 0;
         isPlaying = true;
     }
-
-    /**
-     * Dealer must stand at 17 or higher
-     *
-     * @param card the card to be put into the hand
-     */
-    @Override
-    public void hit(Card card) {
-        super.hit(card);
-        if (this.value >= 17) {
-            stand();
-        }
-    }
 }
 
 class PlayerHand extends BlackjackHand {
-    PlayerHand() {
+    PlayerHand(int holdValue) {
         cards = new ArrayList<>();
         value = 0;
         isPlaying = true;
-    }
-
-    /**
-     * Player must stand at 20 or higher
-     *
-     * @param card the card to be put into the hand
-     */
-    @Override
-    public void hit(Card card) {
-        super.hit(card);
-        if (this.value >= 20) {
-            stand();
-        }
+        this.holdValue = holdValue;
     }
 }

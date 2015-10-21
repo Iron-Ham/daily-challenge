@@ -12,12 +12,13 @@ class Blackjack {
 
     private HandState[] results;
 
-    Blackjack(int playerCount) {
+    Blackjack(int[] holdValues) {
+        int playerCount = holdValues.length;
         results = new HandState[playerCount];
         cards = new CardDeck();
         players = new ArrayList<>();
         for (int i = 0; i < playerCount; i++) {
-            players.add(new PlayerHand());
+            players.add(new PlayerHand(holdValues[i]));
         }
         dealer = new DealerHand();
     }

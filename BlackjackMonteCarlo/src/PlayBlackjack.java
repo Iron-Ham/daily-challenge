@@ -6,12 +6,12 @@ import java.util.List;
  */
 public class PlayBlackjack {
     private static final int MAX_ITERATIONS = 1000;
-    private static final int NUMBER_OF_PLAYERS = 5; // in addition to the dealer
+    private static final int[] HOLD_VALUES = {17, 18, 19, 20}; // Set the values for each player to stop at
+    private static final int NUMBER_OF_PLAYERS = HOLD_VALUES.length; // in addition to the dealer
 
     public static void main(String[] args) {
-        Blackjack blackjack = new Blackjack(NUMBER_OF_PLAYERS);
+        Blackjack blackjack = new Blackjack(HOLD_VALUES);
         List<HandState[]> simulationResults = new ArrayList<>();
-        // Monte Carlo runs 1000 simulations
         for (int i = 0; i < MAX_ITERATIONS; i++) {
             HandState[] gameResults = blackjack.playGame();
             simulationResults.add(gameResults);
@@ -24,6 +24,7 @@ public class PlayBlackjack {
         //Evaluate Each Player's Wins, Losses, and Ties
         for (int player = 0; player < NUMBER_OF_PLAYERS; player++) {
             System.out.printf("Player %d:\n", player+1);
+            System.out.printf("Holds at %d\n", HOLD_VALUES[player]);
             int winCount = 0;
             int loseCount = 0;
             int drawCount = 0;
