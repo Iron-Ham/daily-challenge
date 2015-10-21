@@ -65,9 +65,8 @@ class Blackjack {
         if (!dealer.isPlaying && player.isPlaying) {
             //If dealer has busted
             if (dealer.stand() > 21) {
-                if (player.getValue() <= 21) {
-                    return PlayResult.WIN;
-                }
+                //The player would not be playing if his value is over 21. Thus, we can safely return a win.
+                return PlayResult.WIN;
             }
             //We cannot evaluate the game if the dealer is standing and the player is still playing.
             return null;
