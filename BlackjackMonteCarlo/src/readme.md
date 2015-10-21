@@ -1,7 +1,7 @@
 # Monte Carlo Simulation of Blackjack
 
 ## Running
-**Requires Java 1.8 Compiler**. Compile all java files, and execute the PlayBlackjack class.
+**Requires Java 1.8 Compiler**. Open PlayBlackjack file. Ensure that parameters are set how you'd like them. Compile all java files, and run PlayBlackjack.
 
 `cd /path/to/src/`
 
@@ -9,12 +9,13 @@
 
 ## Assumptions
 1. Dealer does not hit on a soft-17 (17 with an ace counting as an 11).
-2. The game is played in casino-rotation (players first, then dealer). If we assume that the game is played in sequence, there is a note in the Blackjack.java file which explains how to accommodate for that.
-3. If the player gets a blackjack (21 on first two cards), the player immediately wins. 
+2. If the player gets a blackjack (21 on first two cards), the player immediately wins. 
 
 ## Output
-Program outputs the result of each game of blackjack, along with the cards held by the player and dealer.
+Program outputs the rates of each player of the game.
 
-Casino-rules blackjack: Win rate hovers around 33%
+## Features
 
-Sequential-play blackjack: Win-rate hovers around 37%
+1. Support for multiple players. Technically unlimited, but since the game is played with 1 deck, keep it reasonable. 6 players is a reasonable cap. 
+2. Players may hold at different values.
+3. Robust models. These models can be re-used in any other project to do with cards and decks with little to no modification. 
