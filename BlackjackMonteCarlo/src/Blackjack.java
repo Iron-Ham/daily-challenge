@@ -49,23 +49,23 @@ class Blackjack {
         //Deal initial cards
         dealStartingHands(dealer, player);
 
+        //If the player gets an instant-blackjack, the player wins irrespective of the dealer's hand.
+        if (!player.isPlaying) {
+            result = PlayResult.WIN;
+            printHand(result);
+            prepareForNextGame();
+            return result;
+        }
+
         //In casinos, the game is played such that all players must stand or bust before the dealer plays his turn.
         while (player.isPlaying) {
             playRound(player);
         }
 
-        while (dealer.isPlaying) {
+        while (dealer.isPlaying && player.stand() <= 21) {
             playRound(dealer);
         }
-
-        //If we're making the assumption that the game is played at the same time (1v1 home-blackjack), uncomment the
-        //following function and comment out the previous two while loops
-//        while (result == null) {
-//            playRound(dealer);
-//            playRound(player);
-//            result = evaluateHands(dealer, player);
-//        }
-
+        
         result = evaluateHands(dealer, player);
         printHand(result);
         prepareForNextGame();
