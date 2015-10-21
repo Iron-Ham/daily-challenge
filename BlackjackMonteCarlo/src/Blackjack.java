@@ -64,15 +64,20 @@ class Blackjack {
             printHand(result);
             prepareForNextGame();
             return result;
-        } else {
-            // Calculate game result
-            int dealerScore = dealer.stand();
-            int playerScore = player.stand();
-            result = calculateResult(dealerScore, playerScore);
-            printHand(result);
-            prepareForNextGame();
-            return result;
         }
+
+        while (player.isPlaying) {
+            Card c = cards.drawCard();
+            player.hit(c);
+        }
+
+        int dealerScore = dealer.stand();
+        int playerScore = player.stand();
+        result = calculateResult(dealerScore, playerScore);
+        printHand(result);
+        prepareForNextGame();
+        return result;
+
     }
 
     private int roundCount = 0;
