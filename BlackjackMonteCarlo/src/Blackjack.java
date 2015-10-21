@@ -49,11 +49,24 @@ class Blackjack {
         //Deal initial cards
         dealStartingHands(dealer, player);
 
-        // Game loops
-        while (result == null) {
-            playRound(dealer, player);
-            result = evaluateHands(dealer, player);
+        //In casinos, the game is played such that all players must stand or bust before the dealer plays his turn.
+        while (player.isPlaying) {
+            playRound(player);
         }
+
+        while (dealer.isPlaying) {
+            playRound(dealer);
+        }
+
+        //If we're making the assumption that the game is played at the same time (1v1 home-blackjack), uncomment the
+        //following function and comment out the line `result = evaluateHands(dealer, player);`
+//        while (result == null) {
+//            playRound(dealer);
+//            playRound(player);
+//            result = evaluateHands(dealer, player);
+//        }
+
+        result = evaluateHands(dealer, player);
         printHand(result);
         prepareForNextGame();
         return result;
@@ -117,14 +130,10 @@ class Blackjack {
         cards = new CardDeck();
     }
 
-    private void playRound(BlackjackHand dealerHand, BlackjackHand playerHand) {
-        if (dealerHand.isPlaying) {
+    private void playRound(BlackjackHand hand) {
+        if (hand.isPlaying) {
             Card c = cards.drawCard();
-            dealerHand.hit(c);
-        }
-        if (playerHand.isPlaying) {
-            Card c = cards.drawCard();
-            playerHand.hit(c);
+            hand.hit(c);
         }
     }
 
