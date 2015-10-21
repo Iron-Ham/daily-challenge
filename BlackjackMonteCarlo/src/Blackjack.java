@@ -53,19 +53,27 @@ class Blackjack {
         while (dealer.isPlaying && player.isPlaying) {
             playRound(dealer, player);
         }
-        while (dealer.isPlaying) {
+        // The player has stood but not busted.
+        while (dealer.isPlaying && player.stand() <= 21) {
             Card c = cards.drawCard();
             dealer.hit(c);
         }
-
+        //If the player has busted
+        if (dealer.isPlaying) {
+            result = PlayResult.LOSE;
+            printHand(result);
+            prepareForNextGame();
+            return result;
+        }
+        //If the dealer has busted
         if (player.isPlaying && dealer.stand() > 21) {
-            //Player wins due to showdown rule.
             result = PlayResult.WIN;
             printHand(result);
             prepareForNextGame();
             return result;
         }
 
+        //The dealer has stood, the player has not busted
         while (player.isPlaying) {
             Card c = cards.drawCard();
             player.hit(c);
