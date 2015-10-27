@@ -2,10 +2,9 @@
 https://www.youtube.com/watch?v=9RzWRPgc54Q 
 
 ## Recently Completed
-- Monte Carlo Blackjack
-- 8 Queens (Simulated Annealing)
-- 8 Queens (Genetic Algorithm)
-
+- Monte Carlo Blackjack: No Unit Tests, but really robust models.
+- 8 Queens (Simulated Annealing): Unit Tests + Algo
+- 8 Queens (Genetic Algorithm): Unit Tests + Algo
 
 ## Next on the Chopping Block
 - Spotify Challenges x3
