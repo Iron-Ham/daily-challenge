@@ -2,6 +2,7 @@
 https://www.youtube.com/watch?v=9RzWRPgc54Q 
 
 ## Recently Completed
+- Hidden Markov Model. Uses the Viterbi algorithm.
 - Monte Carlo Blackjack: No Unit Tests, but really robust models.
 - 8 Queens (Simulated Annealing): Unit Tests + Algo
 - 8 Queens (Genetic Algorithm): Unit Tests + Algo
