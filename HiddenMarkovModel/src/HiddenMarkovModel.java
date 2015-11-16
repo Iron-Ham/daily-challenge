@@ -104,8 +104,6 @@ public class HiddenMarkovModel {
                 fileReader.close();
             }
         }
-
-
     }
 
     private void testHMM() {
