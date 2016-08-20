@@ -8,12 +8,17 @@ import java.util.Scanner;
  */
 public class HiddenMarkovModel {
     private final int numberOfStates = 26;
-    private final double[] priorProbability = new double[numberOfStates];
     private final int[] outputCount = new int[numberOfStates];
     private final double[][] emissions = new double[numberOfStates][numberOfStates]; // The probability of any one output occurring given a state
     private final int[][] emissionsCount = new int[numberOfStates][numberOfStates];
     private final int[][] transitionsCount = new int[numberOfStates][numberOfStates];
     private final double[][] transitions = new double[numberOfStates][numberOfStates];
+    private final double[] priorProbability = {
+            .11602, .04702, .03511, .02670, .02007, .03779, .01950, .07232, .06286,
+            .00597, .00590, .02705, .04383, .02365, .06264, .02545, .00173, .01653,
+            .07755, .16671, .01487, .00649, .06753, .00017, .01620, .00034
+    }; // From the Project Gutenberg analysis
+
 
     HiddenMarkovModel(String testingData) {
         trainModel();
@@ -158,16 +163,8 @@ public class HiddenMarkovModel {
             if (fileReader != null) {
                 fileReader.close();
             }
-            calculatePriorProbability();
             calculateEmissions();
             calculateTransitions();
-        }
-    }
-
-    private void calculatePriorProbability() {
-        int sum = sumOfArray(outputCount);
-        for (int i = 0; i < priorProbability.length; i++) {
-            priorProbability[i] = (double) outputCount[i] / sum;
         }
     }
 
