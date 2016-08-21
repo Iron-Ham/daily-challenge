@@ -1,9 +1,5 @@
 package StringCompression;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * Created by heshamsalman on 8/20/16.
  */

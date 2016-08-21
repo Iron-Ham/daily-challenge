@@ -10,20 +10,19 @@ public class RotateMatrix {
         if (matrix.length != matrix[0].length || matrix.length == 0) return matrix;
 
         for (int layer = 0; layer < matrix.length / 2; layer++) {
-            int start = layer;
             int end = matrix.length - 1 - layer;
 
-            for (int i = start; i < end; i++) {
+            for (int i = layer; i < end; i++) {
 
                 int offset = i - layer;
                 // Save first position
-                int top = matrix[start][i];
+                int top = matrix[layer][i];
 
                 // Left -> Top
-                matrix[start][i] = matrix[end - offset][start];
+                matrix[layer][i] = matrix[end - offset][layer];
 
                 // Bottom -> Left
-                matrix[end - offset][start] = matrix[end][end - offset];
+                matrix[end - offset][layer] = matrix[end][end - offset];
 
                 // Right -> Bottom
                 matrix[end][end - offset] = matrix[i][end];
