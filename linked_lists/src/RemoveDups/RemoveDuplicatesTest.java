@@ -52,6 +52,47 @@ public class RemoveDuplicatesTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void removeDuplicateNodesWithoutSet_SeriesOfDuplicates() {
+        head.next = new Node(1);
+        head.next.next = new Node(1);
+        head.next.next.next = new Node(1);
+        head.next.next.next.next = new Node(1);
+
+        Node n = rD.removeDuplicatesWithoutSet(head);
+        int expected = 0;
+        int actual = countNodeDepth(n);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void removeDuplicateNodesWithoutSet_ScatteredDuplicates() {
+        head.next = new Node(1);
+        head.next.next = new Node(0);
+        head.next.next.next = new Node(1);
+        head.next.next.next.next = new Node(3);
+        head.next.next.next.next.next = new Node(6);
+        head.next.next.next.next.next.next = new Node(4);
+        Node n = rD.removeDuplicatesWithoutSet(head);
+        int expected = 4;
+        int actual = countNodeDepth(n);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void removeDuplicateNodesWithoutSet_FinalDuplicate() {
+        head.next = new Node(1);
+        head.next.next = new Node(0);
+        head.next.next.next = new Node(4);
+        head.next.next.next.next = new Node(3);
+        head.next.next.next.next.next = new Node(6);
+        head.next.next.next.next.next.next = new Node(1);
+        Node n = rD.removeDuplicatesWithoutSet(head);
+        int expected = 4;
+        int actual = countNodeDepth(n);
+        assertEquals(expected, actual);
+    }
+
     int countNodeDepth(Node head) {
         int count = 0;
         Node n = head;

@@ -23,6 +23,23 @@ public class RemoveDuplicates {
         }
         return head;
     }
+
+    Node removeDuplicatesWithoutSet(Node head) {
+        Node n = head;
+        Node runner = head;
+
+        while (n != null && n.next != null) {
+            while (runner.next != null) {
+                if (runner.next.data == n.data) {
+                    runner.next = runner.next.next;
+                } else {
+                    runner = runner.next;
+                }
+            }
+            n = n.next;
+        }
+        return head;
+    }
 }
 
 class Node {
