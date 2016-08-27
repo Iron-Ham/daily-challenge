@@ -30,7 +30,7 @@ struct ChapterOne {
         let word = word.lowercaseString.stringByReplacingOccurrencesOfString(" ", withString: "")
         var numOdds = 0
         var count = [Int](count: 128, repeatedValue: 0)
-        word.characters.forEach { count[Int(String($0))!] += 1 }
+        word.characters.forEach { count[Int($0.unicodeScalarCodePoint())] += 1 }
         
         for c in count where c % 2 != 0 {
             if numOdds == 1 { return false }
@@ -39,4 +39,15 @@ struct ChapterOne {
         return true
     }
     
+}
+
+extension Character
+{
+    func unicodeScalarCodePoint() -> UInt32
+    {
+        let characterString = String(self)
+        let scalars = characterString.unicodeScalars
+        
+        return scalars[scalars.startIndex].value
+    }
 }
