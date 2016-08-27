@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DC2C66F01D715558000589CC /* chapter1.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2C66EF1D715558000589CC /* chapter1.swift */; };
-		DC5B2E481D71692E00DB9647 /* UnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5B2E471D71692E00DB9647 /* UnitTests.swift */; };
+		DC5B2E481D71692E00DB9647 /* ChapterOneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5B2E471D71692E00DB9647 /* ChapterOneTests.swift */; };
 		DC5B2E4D1D71694B00DB9647 /* chapter1.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2C66EF1D715558000589CC /* chapter1.swift */; };
 		DC5B2E4F1D7169E400DB9647 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5B2E4E1D7169E400DB9647 /* main.swift */; };
 		DC5B2E501D7169E800DB9647 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5B2E4E1D7169E400DB9647 /* main.swift */; };
@@ -30,7 +30,7 @@
 		DC2C66E41D715512000589CC /* daily-challenge-swift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "daily-challenge-swift"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC2C66EF1D715558000589CC /* chapter1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = chapter1.swift; sourceTree = "<group>"; };
 		DC5B2E451D71692E00DB9647 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DC5B2E471D71692E00DB9647 /* UnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTests.swift; sourceTree = "<group>"; };
+		DC5B2E471D71692E00DB9647 /* ChapterOneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterOneTests.swift; sourceTree = "<group>"; };
 		DC5B2E491D71692E00DB9647 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC5B2E4E1D7169E400DB9647 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,7 +83,7 @@
 		DC5B2E461D71692E00DB9647 /* UnitTests */ = {
 			isa = PBXGroup;
 			children = (
-				DC5B2E471D71692E00DB9647 /* UnitTests.swift */,
+				DC5B2E471D71692E00DB9647 /* ChapterOneTests.swift */,
 				DC5B2E491D71692E00DB9647 /* Info.plist */,
 			);
 			path = UnitTests;
@@ -133,14 +133,16 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Hesham Salman";
 				TargetAttributes = {
 					DC2C66E31D715512000589CC = {
 						CreatedOnToolsVersion = 7.2.1;
+						LastSwiftMigration = 0800;
 					};
 					DC5B2E441D71692E00DB9647 = {
 						CreatedOnToolsVersion = 7.2.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -186,7 +188,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC5B2E481D71692E00DB9647 /* UnitTests.swift in Sources */,
+				DC5B2E481D71692E00DB9647 /* ChapterOneTests.swift in Sources */,
 				DC5B2E4D1D71694B00DB9647 /* chapter1.swift in Sources */,
 				DC5B2E501D7169E800DB9647 /* main.swift in Sources */,
 			);
@@ -208,8 +210,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -252,8 +256,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -272,6 +278,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -282,6 +289,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -291,6 +299,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -302,6 +311,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zero.UnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -313,6 +323,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zero.UnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -344,6 +355,7 @@
 				DC5B2E4B1D71692E00DB9647 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
