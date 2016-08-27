@@ -89,22 +89,26 @@ class UnitTests: XCTestCase {
     }
     
     // Palindrome Performance Stress Tests
+    // Xcode 7 + Swift 2.2 runs this @ 0.155s
+    // Swift 3 & Xcode 8-beta6 @ 0.090s
     func testPalindrome_SwiftString() {
         var word = ""
         10000.times {
             word += "0123456789"
         }
-        self.measure {
+        measure {
             self.chapterOne.isPalindrome(word: word)
         }
     }
     
+    // Xcode 7 + Swift 2.2 runs this @ 0.136s
+    // Swift 3 & Xcode 8-beta6 @ 0.080s
     func testPalindrome_Alt_WithArray() {
         var word = ""
         10000.times {
             word += "0123456789"
         }
-        self.measure {
+        measure {
             self.chapterOne.isPalindrome_Alt_WithArray(word: word)
         }
     }
@@ -115,7 +119,7 @@ class UnitTests: XCTestCase {
             word += "0123456789"
         }
         let w = word
-        self.measure {
+        measure {
             self.chapterOne.isPalindrome_NSString(word: w)
         }
     }
@@ -125,7 +129,7 @@ class UnitTests: XCTestCase {
         100000.times {
             word += "0123456789"
         }
-        self.measure {
+        measure {
             self.chapterOne.isPalindrome(word: word)
         }
     }
@@ -135,7 +139,7 @@ class UnitTests: XCTestCase {
         100000.times {
             word += "0123456789"
         }
-        self.measure {
+        measure {
             self.chapterOne.isPalindrome_Alt_WithArray(word: word)
         }
     }
@@ -146,7 +150,7 @@ class UnitTests: XCTestCase {
             word += "0123456789"
         }
         let w = word
-        self.measure {
+        measure {
             self.chapterOne.isPalindrome_NSString(word: w)
         }
     }
@@ -159,7 +163,7 @@ class UnitTests: XCTestCase {
             word += "0123456789"
         }
         let w = word
-        self.measure {
+        measure {
             self.chapterOne.isPalindrome_NSString(word: w)
         }
     }
