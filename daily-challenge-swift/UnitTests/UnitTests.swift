@@ -30,7 +30,6 @@ class UnitTests: XCTestCase {
             self.chapterOne.isPalindrome_Alt_WithArray(word)
         }
     }
-    
 }
 
 

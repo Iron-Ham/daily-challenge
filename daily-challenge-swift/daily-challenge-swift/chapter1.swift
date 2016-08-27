@@ -16,13 +16,12 @@ struct ChapterOne {
         return Set(word.characters.map { $0 }).count == word.characters.count ? true : false
     }
     
-    // schwifty
     func isPalindrome(word: String) -> Bool {
         let word = word.lowercaseString.stringByReplacingOccurrencesOfString(" ", withString: "")
         let wordIsOdd = word.characters.count % 2 != 0
-        var characterCount = [Character: Int]()
-        word.characters.forEach { (c) in characterCount[c] = characterCount[c] ?? 0 + 1 }
-        let oddsCount = characterCount.values.filter { $0 % 2 == 1 } .reduce(0) { (total, number) in total + number }
+        var count = [Int](count: 128, repeatedValue: 0)
+        word.characters.forEach { count[Int($0.unicodeScalarCodePoint())] += 1 }
+        let oddsCount = count.filter { $0 % 2 == 1 } .reduce(0) { (total, number) in total + number }
         return wordIsOdd ? oddsCount == 1 : oddsCount == 0
     }
     
