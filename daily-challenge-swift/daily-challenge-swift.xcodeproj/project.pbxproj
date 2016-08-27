@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		DC2C66F01D715558000589CC /* chapter1.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2C66EF1D715558000589CC /* chapter1.swift */; };
+		DC5B2E481D71692E00DB9647 /* UnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5B2E471D71692E00DB9647 /* UnitTests.swift */; };
+		DC5B2E4D1D71694B00DB9647 /* chapter1.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2C66EF1D715558000589CC /* chapter1.swift */; };
+		DC5B2E4F1D7169E400DB9647 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5B2E4E1D7169E400DB9647 /* main.swift */; };
+		DC5B2E501D7169E800DB9647 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5B2E4E1D7169E400DB9647 /* main.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,10 +29,21 @@
 /* Begin PBXFileReference section */
 		DC2C66E41D715512000589CC /* daily-challenge-swift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "daily-challenge-swift"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC2C66EF1D715558000589CC /* chapter1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = chapter1.swift; sourceTree = "<group>"; };
+		DC5B2E451D71692E00DB9647 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC5B2E471D71692E00DB9647 /* UnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTests.swift; sourceTree = "<group>"; };
+		DC5B2E491D71692E00DB9647 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC5B2E4E1D7169E400DB9647 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		DC2C66E11D715512000589CC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC5B2E421D71692E00DB9647 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -42,6 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				DC2C66E61D715512000589CC /* daily-challenge-swift */,
+				DC5B2E461D71692E00DB9647 /* UnitTests */,
 				DC2C66E51D715512000589CC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -50,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				DC2C66E41D715512000589CC /* daily-challenge-swift */,
+				DC5B2E451D71692E00DB9647 /* UnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -58,8 +75,18 @@
 			isa = PBXGroup;
 			children = (
 				DC2C66EF1D715558000589CC /* chapter1.swift */,
+				DC5B2E4E1D7169E400DB9647 /* main.swift */,
 			);
 			path = "daily-challenge-swift";
+			sourceTree = "<group>";
+		};
+		DC5B2E461D71692E00DB9647 /* UnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				DC5B2E471D71692E00DB9647 /* UnitTests.swift */,
+				DC5B2E491D71692E00DB9647 /* Info.plist */,
+			);
+			path = UnitTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -82,6 +109,23 @@
 			productReference = DC2C66E41D715512000589CC /* daily-challenge-swift */;
 			productType = "com.apple.product-type.tool";
 		};
+		DC5B2E441D71692E00DB9647 /* UnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DC5B2E4C1D71692E00DB9647 /* Build configuration list for PBXNativeTarget "UnitTests" */;
+			buildPhases = (
+				DC5B2E411D71692E00DB9647 /* Sources */,
+				DC5B2E421D71692E00DB9647 /* Frameworks */,
+				DC5B2E431D71692E00DB9647 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UnitTests;
+			productName = UnitTests;
+			productReference = DC5B2E451D71692E00DB9647 /* UnitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -93,6 +137,9 @@
 				ORGANIZATIONNAME = "Hesham Salman";
 				TargetAttributes = {
 					DC2C66E31D715512000589CC = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+					DC5B2E441D71692E00DB9647 = {
 						CreatedOnToolsVersion = 7.2.1;
 					};
 				};
@@ -110,16 +157,38 @@
 			projectRoot = "";
 			targets = (
 				DC2C66E31D715512000589CC /* daily-challenge-swift */,
+				DC5B2E441D71692E00DB9647 /* UnitTests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DC5B2E431D71692E00DB9647 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DC2C66E01D715512000589CC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC5B2E4F1D7169E400DB9647 /* main.swift in Sources */,
 				DC2C66F01D715558000589CC /* chapter1.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC5B2E411D71692E00DB9647 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC5B2E481D71692E00DB9647 /* UnitTests.swift in Sources */,
+				DC5B2E4D1D71694B00DB9647 /* chapter1.swift in Sources */,
+				DC5B2E501D7169E800DB9647 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,6 +294,28 @@
 			};
 			name = Release;
 		};
+		DC5B2E4A1D71692E00DB9647 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = UnitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zero.UnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		DC5B2E4B1D71692E00DB9647 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = UnitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zero.UnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -242,6 +333,15 @@
 			buildConfigurations = (
 				DC2C66EC1D715512000589CC /* Debug */,
 				DC2C66ED1D715512000589CC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DC5B2E4C1D71692E00DB9647 /* Build configuration list for PBXNativeTarget "UnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC5B2E4A1D71692E00DB9647 /* Debug */,
+				DC5B2E4B1D71692E00DB9647 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
