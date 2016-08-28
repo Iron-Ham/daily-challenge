@@ -25,7 +25,7 @@ class LinkedListNodeTests: XCTestCase {
     }
     
     func testEquality() {
-        var newNode = LinkedListNode(value: 5)
+        let newNode = LinkedListNode(value: 5)
         XCTAssertEqual(newNode, node)
         node.appendToEnd(node: newNode)
         XCTAssertNotEqual(node, newNode)

@@ -17,7 +17,7 @@ struct ChapterOne {
     func isUnique(word: String) -> Bool {
         let sizeOfCharSet = 128
         if (word.characters.count) > sizeOfCharSet { return false }
-        return Set(word.characters.map { $0 }).count == word.characters.count ? true : false
+        return Set(word.characters).count == word.characters.count ? true : false
     }
     
     /// Is Palindrome:

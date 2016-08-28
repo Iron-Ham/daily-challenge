@@ -26,6 +26,7 @@ class LinkedListNode: Equatable {
         while n.next != nil { n = n.next! }
         n.next = node
     }
+
 }
 
 func == (lhs: LinkedListNode, rhs: LinkedListNode) -> Bool {
