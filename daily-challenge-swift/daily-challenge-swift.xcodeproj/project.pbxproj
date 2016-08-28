@@ -12,6 +12,11 @@
 		DC5B2E4D1D71694B00DB9647 /* chapter1.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2C66EF1D715558000589CC /* chapter1.swift */; };
 		DC5B2E4F1D7169E400DB9647 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5B2E4E1D7169E400DB9647 /* main.swift */; };
 		DC5B2E501D7169E800DB9647 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5B2E4E1D7169E400DB9647 /* main.swift */; };
+		DCE5A5881D7275E6007DA734 /* RemoveDuplicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE5A5871D7275E6007DA734 /* RemoveDuplicates.swift */; };
+		DCE5A58A1D727602007DA734 /* LinkedListNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE5A5891D727602007DA734 /* LinkedListNode.swift */; };
+		DCE5A58F1D72787C007DA734 /* LinkedListNodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE5A58E1D72787C007DA734 /* LinkedListNodeTests.swift */; };
+		DCE5A5901D7278D6007DA734 /* RemoveDuplicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE5A5871D7275E6007DA734 /* RemoveDuplicates.swift */; };
+		DCE5A5911D7278D6007DA734 /* LinkedListNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE5A5891D727602007DA734 /* LinkedListNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,6 +38,9 @@
 		DC5B2E471D71692E00DB9647 /* ChapterOneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterOneTests.swift; sourceTree = "<group>"; };
 		DC5B2E491D71692E00DB9647 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC5B2E4E1D7169E400DB9647 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		DCE5A5871D7275E6007DA734 /* RemoveDuplicates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoveDuplicates.swift; sourceTree = "<group>"; };
+		DCE5A5891D727602007DA734 /* LinkedListNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedListNode.swift; sourceTree = "<group>"; };
+		DCE5A58E1D72787C007DA734 /* LinkedListNodeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedListNodeTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +64,7 @@
 		DC2C66DB1D715512000589CC = {
 			isa = PBXGroup;
 			children = (
-				DC2C66E61D715512000589CC /* daily-challenge-swift */,
+				DC2C66E61D715512000589CC /* Daily Challenge */,
 				DC5B2E461D71692E00DB9647 /* UnitTests */,
 				DC2C66E51D715512000589CC /* Products */,
 			);
@@ -71,22 +79,58 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		DC2C66E61D715512000589CC /* daily-challenge-swift */ = {
+		DC2C66E61D715512000589CC /* Daily Challenge */ = {
 			isa = PBXGroup;
 			children = (
-				DC2C66EF1D715558000589CC /* chapter1.swift */,
+				DCE5A5861D727593007DA734 /* Chapter Two */,
+				DCE5A58D1D727866007DA734 /* Chapter One */,
 				DC5B2E4E1D7169E400DB9647 /* main.swift */,
 			);
+			name = "Daily Challenge";
 			path = "daily-challenge-swift";
 			sourceTree = "<group>";
 		};
 		DC5B2E461D71692E00DB9647 /* UnitTests */ = {
 			isa = PBXGroup;
 			children = (
-				DC5B2E471D71692E00DB9647 /* ChapterOneTests.swift */,
+				DCE5A58C1D727859007DA734 /* Chapter Two Tests */,
+				DCE5A58B1D727850007DA734 /* Chapter One Tests */,
 				DC5B2E491D71692E00DB9647 /* Info.plist */,
 			);
 			path = UnitTests;
+			sourceTree = "<group>";
+		};
+		DCE5A5861D727593007DA734 /* Chapter Two */ = {
+			isa = PBXGroup;
+			children = (
+				DCE5A5871D7275E6007DA734 /* RemoveDuplicates.swift */,
+				DCE5A5891D727602007DA734 /* LinkedListNode.swift */,
+			);
+			name = "Chapter Two";
+			sourceTree = "<group>";
+		};
+		DCE5A58B1D727850007DA734 /* Chapter One Tests */ = {
+			isa = PBXGroup;
+			children = (
+				DC5B2E471D71692E00DB9647 /* ChapterOneTests.swift */,
+			);
+			name = "Chapter One Tests";
+			sourceTree = "<group>";
+		};
+		DCE5A58C1D727859007DA734 /* Chapter Two Tests */ = {
+			isa = PBXGroup;
+			children = (
+				DCE5A58E1D72787C007DA734 /* LinkedListNodeTests.swift */,
+			);
+			name = "Chapter Two Tests";
+			sourceTree = "<group>";
+		};
+		DCE5A58D1D727866007DA734 /* Chapter One */ = {
+			isa = PBXGroup;
+			children = (
+				DC2C66EF1D715558000589CC /* chapter1.swift */,
+			);
+			name = "Chapter One";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,7 +223,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCE5A58A1D727602007DA734 /* LinkedListNode.swift in Sources */,
 				DC5B2E4F1D7169E400DB9647 /* main.swift in Sources */,
+				DCE5A5881D7275E6007DA734 /* RemoveDuplicates.swift in Sources */,
 				DC2C66F01D715558000589CC /* chapter1.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -188,6 +234,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCE5A5911D7278D6007DA734 /* LinkedListNode.swift in Sources */,
+				DCE5A5901D7278D6007DA734 /* RemoveDuplicates.swift in Sources */,
+				DCE5A58F1D72787C007DA734 /* LinkedListNodeTests.swift in Sources */,
 				DC5B2E481D71692E00DB9647 /* ChapterOneTests.swift in Sources */,
 				DC5B2E4D1D71694B00DB9647 /* chapter1.swift in Sources */,
 				DC5B2E501D7169E800DB9647 /* main.swift in Sources */,
