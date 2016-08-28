@@ -58,6 +58,7 @@ struct ChapterOne {
     }
     
     func isPermutation(ofString: String, string: String) -> Bool {
+        let string = string.lowercased().replacingOccurrences(of: " ", with: ""), ofString = ofString.lowercased().replacingOccurrences(of: " ", with: "")
         if string.characters.count != ofString.characters.count { return false }
         return Set(string.characters).count == Set(ofString.characters).count
     }
@@ -65,7 +66,7 @@ struct ChapterOne {
     func isOneEditAway(fromString: String, string: String) -> Bool {
         if abs(fromString.characters.count - string.characters.count) > 1 { return false }
         var i = 0, j = 0, numDifferences = 0
-        let fromString = fromString as NSString, string = string as NSString
+        let fromString = fromString.lowercased().replacingOccurrences(of: " ", with: "") as NSString, string = string.lowercased().replacingOccurrences(of: " ", with: "") as NSString
         while i < fromString.length && j < string.length {
             if fromString.character(at: i) != string.character(at: j) {
                 numDifferences += 1
@@ -73,10 +74,47 @@ struct ChapterOne {
                 else if fromString.length < string.length { i -= 1 }
             }
             if numDifferences > 1 { return false }
-            i += 1
-            j += 1
+            i += 1 ; j += 1
         }
         return true
+    }
+    
+    func compress(string: String) -> String {
+        if Set(string.characters).count >= string.characters.count / 2 { return string }
+        var characterCount = [Character: Int]()
+        string.characters.forEach { characterCount[$0] = (characterCount[$0] ?? 0) + 1 }
+        var string = ""
+        for (key, value) in characterCount { string += "\(key)\(value)" }
+        return string
+    }
+    
+    func stringRotation(ofString: String, string: String) -> Bool {
+        let ofString = ofString + ofString
+        return ofString.contains(string)
+    }
+    
+    private struct Point {
+        var inner: Int
+        var outer: Int
+    }
+    
+    func zeroMatrix(matrix: [[Int]]) -> [[Int]] {
+        var zeros = [Point]()
+        var matrix = matrix
+        for outer in 0..<matrix.count {
+            for inner in 0..<matrix[0].count {
+                if matrix[outer][inner] == 0 { zeros.append(Point(inner: inner, outer: outer)) }
+            }
+        }
+        for point in zeros {
+            for i in 0..<matrix[point.outer].count {
+                matrix[point.outer][i] = 0
+            }
+            for i in 0..<matrix.count {
+                matrix[i][point.inner] = 0
+            }
+        }
+        return matrix
     }
     
 }

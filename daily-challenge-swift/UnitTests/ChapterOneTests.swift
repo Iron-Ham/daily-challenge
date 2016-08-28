@@ -167,6 +167,83 @@ class UnitTests: XCTestCase {
             self.chapterOne.isPalindrome_NSString(word: w)
         }
     }
+    
+    // IsPermutationOfString UnitTests
+    func testIsPermutationOfStringWhereIsPermutation() {
+        let expected = true
+        let wordOne = "y ellow", wordTwo = "wolyel"
+        let actual = chapterOne.isPermutation(ofString: wordOne, string: wordTwo)
+        XCTAssertEqual(expected, actual)
+    }
+    
+    func testIsPermutationOfStringWhereIsNotPermutation() {
+        let expected = false
+        let wordOne = "magic city", wordTwo = "hippies"
+        let actual = chapterOne.isPermutation(ofString: wordOne, string: wordTwo)
+        XCTAssertEqual(expected, actual)
+    }
+    
+    
+    // IsOneEditAway UnitTests
+    func testIsOneEditAwayWhereIsOneEditAway() {
+        let expected = true
+        let wordOne = "brasil", wordTwo = "brazil"
+        let actual = chapterOne.isOneEditAway(fromString: wordOne, string: wordTwo)
+        XCTAssertEqual(expected, actual)
+    }
+    
+    func testIsOneEditAwayWhereIsNotOneEditAway() {
+        let expected = false
+        let wordOne = "espana", wordTwo = "spain"
+        let actual = chapterOne.isOneEditAway(fromString: wordOne, string: wordTwo)
+        XCTAssertEqual(expected, actual)
+    }
+    
+    // CompressString UnitTests 
+    func testCompress() {
+        let word = "aaaaaaaaaa"
+        let expected = "a10"
+        let actual = chapterOne.compress(string: word)
+        XCTAssertEqual(expected, actual)
+    }
+    
+    func testCompressReturns() {
+        let word = "abc"
+        let expected = "abc"
+        let actual = chapterOne.compress(string: word)
+        XCTAssertEqual(expected, actual)
+    }
+    
+    func testStringRotation() {
+        let ofString = "erbottlewat", string = "waterbottle"
+        let expected = true
+        let actual = chapterOne.stringRotation(ofString: ofString, string: string)
+        XCTAssertEqual(expected, actual)
+    }
+    
+    func testZeroMatrix() {
+        let matrix = [
+            [1, 0, 3, 4],
+            [0, 9, 8, 7],
+            [2, 4, 6, 5],
+            [1, 1, 1, 1]
+        ]
+        
+        let expected = [
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 6, 5],
+            [0, 0, 1, 1]
+        ]
+        
+        let actual = chapterOne.zeroMatrix(matrix: matrix)
+        
+        for i in 0..<expected.count {
+            for j in 0..<expected[0].count {
+                XCTAssertEqual(expected[i][j], actual[i][j])
+            }
+        }
+    }
 }
 
 
