@@ -19,7 +19,6 @@ struct DuplicateRemover {
         
         while (node.next != nil) {
             integerSet.insert(node.value)
-            
             if let value = node.next?.value, integerSet.contains(value) {
                 node.next = node.next?.next
             } else if let next = node.next {
@@ -33,8 +32,11 @@ struct DuplicateRemover {
         while (head.next != nil) {
             var runner: LinkedListNode? = head
             while (runner != nil) {
-                if runner?.next?.value == head.value { runner?.next = runner?.next?.next }
-                else { runner = runner?.next }
+                if runner?.next?.value == head.value {
+                    runner?.next = runner?.next?.next
+                } else {
+                    runner = runner?.next
+                }
             }
             
             if let next = head.next {
