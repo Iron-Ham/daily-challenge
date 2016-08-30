@@ -18,6 +18,9 @@
 		DCE5A58F1D72787C007DA734 /* LinkedListNodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE5A58E1D72787C007DA734 /* LinkedListNodeTests.swift */; };
 		DCE5A5901D7278D6007DA734 /* DuplicateRemover.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE5A5871D7275E6007DA734 /* DuplicateRemover.swift */; };
 		DCE5A5911D7278D6007DA734 /* LinkedListNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE5A5891D727602007DA734 /* LinkedListNode.swift */; };
+		DCF620BE1D7520E5008A5895 /* SumLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF620BD1D7520E5008A5895 /* SumLists.swift */; };
+		DCF620C01D752EE9008A5895 /* SumListsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF620BF1D752EE9008A5895 /* SumListsTests.swift */; };
+		DCF620C11D752EEE008A5895 /* SumLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF620BD1D7520E5008A5895 /* SumLists.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,6 +46,8 @@
 		DCE5A5871D7275E6007DA734 /* DuplicateRemover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicateRemover.swift; sourceTree = "<group>"; };
 		DCE5A5891D727602007DA734 /* LinkedListNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedListNode.swift; sourceTree = "<group>"; };
 		DCE5A58E1D72787C007DA734 /* LinkedListNodeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedListNodeTests.swift; sourceTree = "<group>"; };
+		DCF620BD1D7520E5008A5895 /* SumLists.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SumLists.swift; sourceTree = "<group>"; };
+		DCF620BF1D752EE9008A5895 /* SumListsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SumListsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +112,7 @@
 			children = (
 				DCE5A5871D7275E6007DA734 /* DuplicateRemover.swift */,
 				DCE5A5891D727602007DA734 /* LinkedListNode.swift */,
+				DCF620BD1D7520E5008A5895 /* SumLists.swift */,
 			);
 			name = "Chapter Two";
 			sourceTree = "<group>";
@@ -124,6 +130,7 @@
 			children = (
 				DCE5A58E1D72787C007DA734 /* LinkedListNodeTests.swift */,
 				DCA8E2371D72A3A0008C0B1B /* DuplicateRemoverTests.swift */,
+				DCF620BF1D752EE9008A5895 /* SumListsTests.swift */,
 			);
 			name = "Chapter Two Tests";
 			sourceTree = "<group>";
@@ -229,6 +236,7 @@
 				DCE5A58A1D727602007DA734 /* LinkedListNode.swift in Sources */,
 				DC5B2E4F1D7169E400DB9647 /* main.swift in Sources */,
 				DCE5A5881D7275E6007DA734 /* DuplicateRemover.swift in Sources */,
+				DCF620BE1D7520E5008A5895 /* SumLists.swift in Sources */,
 				DC2C66F01D715558000589CC /* chapter1.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -242,6 +250,8 @@
 				DCE5A58F1D72787C007DA734 /* LinkedListNodeTests.swift in Sources */,
 				DC5B2E481D71692E00DB9647 /* ChapterOneTests.swift in Sources */,
 				DC5B2E4D1D71694B00DB9647 /* chapter1.swift in Sources */,
+				DCF620C01D752EE9008A5895 /* SumListsTests.swift in Sources */,
+				DCF620C11D752EEE008A5895 /* SumLists.swift in Sources */,
 				DC5B2E501D7169E800DB9647 /* main.swift in Sources */,
 				DCA8E2381D72A3A0008C0B1B /* DuplicateRemoverTests.swift in Sources */,
 			);
